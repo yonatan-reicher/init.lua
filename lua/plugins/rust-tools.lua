@@ -8,14 +8,18 @@ rt.setup({
             -- Code action groups
             vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
         end,
-        checkOnSave = {
-            allFeatures = true,
-            overrideCommand = {
-                'cargo', 'clippy', '--workspace', '--message-format=json',
-                '--all-targets', '--all-features'
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    enable = true,
+                    command = 'clippy',
+                },
             },
         },
     },
+    tools = {
+        inlay_hints = {
+            only_current_line = true,
+        },
+    },
 })
-
-rt.inlay_hints.disable()

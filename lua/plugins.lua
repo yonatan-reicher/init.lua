@@ -24,7 +24,12 @@ return require('packer').startup(function(use)
     use 'github/copilot.vim'
 
     -- Multiple cursors functionality.
-    use 'mg979/vim-visual-multi'
+    use {
+        'mg979/vim-visual-multi',
+        config = function()
+            require('plugins/vim-visual-multi')
+        end
+    }
 
     -- iv and av text-objects.
     use {
@@ -113,16 +118,16 @@ return require('packer').startup(function(use)
         end,
     }
 
-    use {
-        "Maan2003/lsp_lines.nvim",
-        config = function()
-            require("lsp_lines").setup()
-            -- Disable virtual_text since it's redundant due to lsp_lines.
-            vim.diagnostic.config({
-                virtual_text = false,
-            })
-        end,
-    }
+    -- use {
+    --     "Maan2003/lsp_lines.nvim",
+    --     config = function()
+    --         require("lsp_lines").setup()
+    --         -- Disable virtual_text since it's redundant due to lsp_lines.
+    --         vim.diagnostic.config({
+    --             virtual_text = false,
+    --         })
+    --     end,
+    -- }
 
     -- Dispalying lists.
     use {
@@ -181,6 +186,30 @@ return require('packer').startup(function(use)
                     },
                 },
             }
+        end,
+    }
+
+    -- Completion engine!
+    use {
+        'hrsh7th/nvim-cmp',
+        as = 'nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+        },
+        config = function()
+            require('plugins/nvim-cmp')
+        end,
+    }
+
+    use {
+        'gorbit99/codewindow.nvim',
+        config = function()
+            local codewindow = require('codewindow')
+            codewindow.setup()
+            codewindow.apply_default_keybinds()
         end,
     }
 end)

@@ -32,3 +32,9 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+-- Use :T for toggling Trouble.
+vim.api.nvim_create_user_command('T', 'TroubleToggle', {})
+
+-- Use :LR for LspRestart command.
+vim.api.nvim_create_user_command('LR', 'LspRestart', {})
