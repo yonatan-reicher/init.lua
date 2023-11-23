@@ -5,6 +5,7 @@ lspconfig.tsserver.setup {}
 lspconfig.elmls.setup {}
 lspconfig.clangd.setup {}
 lspconfig.csharp_ls.setup {}
+lspconfig.fsautocomplete.setup {}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
