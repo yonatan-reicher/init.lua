@@ -38,3 +38,6 @@ vim.api.nvim_create_user_command('T', 'TroubleToggle', {})
 
 -- Use :LR for LspRestart command.
 vim.api.nvim_create_user_command('LR', 'LspRestart', {})
+
+vim.keymap.set('n', '>' , '>>')
+vim.keymap.set('n', '<' , '<<')

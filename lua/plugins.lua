@@ -15,13 +15,26 @@ return require('packer').startup(function(use)
 	})
 
     -- Adds the tokyonight colorschemes.
-	use 'folke/tokyonight.nvim'
+    use {
+        'folke/tokyonight.nvim',
+        config = function()
+            require('plugins/tokyonight')
+        end,
+    }
+
+    -- Adds the hybrid colorscheme.
+    use 'w0ng/vim-hybrid'
 
     -- Git support via :G.
     use 'tpope/vim-fugitive'
 
     -- GitHub AI autocomplete.
-    use 'github/copilot.vim'
+    use {
+        'github/copilot.vim',
+        config = function()
+            require('plugins/copilot')
+        end,
+    }
 
     -- Multiple cursors functionality.
     use {
@@ -68,6 +81,9 @@ return require('packer').startup(function(use)
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-tree/nvim-web-devicons' },
         },
+        config = function()
+            require('plugins/telescope')
+        end,
     }
 
     -- Automatic Lsp Configurations.
@@ -79,9 +95,64 @@ return require('packer').startup(function(use)
     }
 
     -- Debugging
+    -- TODO: move to a configuration file.
     use {
         'mfussenegger/nvim-dap',
         requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            local dap = require('dap')
+            dap.adapters.lldb = {
+                type = 'executable',
+                command = 'C:/Program Files/LLVM/bin/lldb-vscode', -- must be absolute path
+                name = "lldb"
+            }
+            dap.configurations.cpp = {
+                {
+                    name = 'Launch',
+                    type = 'lldb',
+                    request = 'launch',
+                    program = function()
+                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    cwd = '${workspaceFolder}',
+                    stopOnEntry = false,
+                    args = {},
+                },
+            }
+            dap.configurations.c = dap.configurations.cpp
+            dap.configurations.rust = {
+                {
+                    name = 'Launch',
+                    type = 'lldb',
+                    request = 'launch',
+                    program = function()
+                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    cwd = '${workspaceFolder}',
+                    stopOnEntry = false,
+                    args = {},
+                    initCommands = function()
+                        -- Find out where to look for the pretty printer Python module
+                        local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
+
+                        local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
+                        local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
+
+                        local commands = {}
+                        local file = io.open(commands_file, 'r')
+                        if file then
+                            for line in file:lines() do
+                                table.insert(commands, line)
+                            end
+                            file:close()
+                        end
+                        table.insert(commands, 1, script_import)
+
+                        return commands
+                    end,
+                },
+            }
+        end,
     }
 
     -- Automatic rust configurations.
@@ -210,6 +281,41 @@ return require('packer').startup(function(use)
             local codewindow = require('codewindow')
             codewindow.setup()
             codewindow.apply_default_keybinds()
+        end,
+    }
+
+    use {
+        'David-Kunz/gen.nvim',
+        config = function()
+            vim.keymap.set('v', '<leader>]', ':Gen<CR>')
+            vim.keymap.set('n', '<leader>]', ':Gen<CR>')
+            require('gen').command = 'wsl -e ollama run $model $prompt' -- default 'ollama run $model $prompt'
+        end,
+    }
+
+    use {
+        'PhilT/vim-fsharp',
+        config = function()
+        end,
+    }
+
+    -- Syntax highlighting for Dafny.
+    use {
+        'mlr-msft/vim-loves-dafny',
+        config = function()
+        end,
+    }
+
+    -- Latex support.
+    use {
+        'lervag/vimtex',
+        config = function ()
+        end,
+    }
+    
+    use {
+        'whonore/Coqtail',
+        config = function ()
         end,
     }
 end)

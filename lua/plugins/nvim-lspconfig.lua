@@ -3,9 +3,16 @@ local lspconfig = require('lspconfig')
 lspconfig.pyright.setup {}
 lspconfig.tsserver.setup {}
 lspconfig.elmls.setup {}
-lspconfig.clangd.setup {}
 lspconfig.csharp_ls.setup {}
 lspconfig.fsautocomplete.setup {}
+lspconfig.dafny.setup {}
+lspconfig.clangd.setup {
+    settings = {
+        clangd = {
+            fallbackFlags = {"-xc++"},
+        }
+    }
+}
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
