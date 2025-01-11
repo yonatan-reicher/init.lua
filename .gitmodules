@@ -1,0 +1,96 @@
+[submodule "pack/my-plugins/start/nvim-web-devicons"]
+	path = pack/my-plugins/start/nvim-web-devicons
+	url = https://www.github.com/nvim-tree/nvim-web-devicons
+[submodule "pack/my-plugins/start/nvim-navic"]
+	path = pack/my-plugins/start/nvim-navic
+	url = https://www.github.com/SmiteshP/nvim-navic
+[submodule "pack/my-plugins/start/galaxyline.nvim"]
+	path = pack/my-plugins/start/galaxyline.nvim
+	url = https://www.github.com/glepnir/galaxyline.nvim
+[submodule "pack/my-plugins/start/nvim"]
+	path = pack/my-plugins/start/nvim
+	url = https://www.github.com/catppuccin/nvim
+[submodule "pack/my-plugins/start/tokyonight.nvim"]
+	path = pack/my-plugins/start/tokyonight.nvim
+	url = https://www.github.com/folke/tokyonight.nvim
+[submodule "pack/my-plugins/start/vim-hybrid"]
+	path = pack/my-plugins/start/vim-hybrid
+	url = https://www.github.com/w0ng/vim-hybrid
+[submodule "pack/my-plugins/start/vim-fugitive"]
+	path = pack/my-plugins/start/vim-fugitive
+	url = https://www.github.com/tpope/vim-fugitive
+[submodule "pack/my-plugins/start/copilot.vim"]
+	path = pack/my-plugins/start/copilot.vim
+	url = https://www.github.com/github/copilot.vim
+[submodule "pack/my-plugins/start/vim-visual-multi"]
+	path = pack/my-plugins/start/vim-visual-multi
+	url = https://www.github.com/mg979/vim-visual-multi
+[submodule "pack/my-plugins/start/vim-textobj-variable-segment"]
+	path = pack/my-plugins/start/vim-textobj-variable-segment
+	url = https://www.github.com/Julian/vim-textobj-variable-segment
+[submodule "pack/my-plugins/start/leap.nvim"]
+	path = pack/my-plugins/start/leap.nvim
+	url = https://www.github.com/ggandor/leap.nvim
+[submodule "pack/my-plugins/start/nvim-treesitter"]
+	path = pack/my-plugins/start/nvim-treesitter
+	url = https://www.github.com/nvim-treesitter/nvim-treesitter
+[submodule "pack/my-plugins/start/telescope.nvim"]
+	path = pack/my-plugins/start/telescope.nvim
+	url = https://www.github.com/nvim-telescope/telescope.nvim
+[submodule "pack/my-plugins/start/nvim-lspconfig"]
+	path = pack/my-plugins/start/nvim-lspconfig
+	url = https://www.github.com/neovim/nvim-lspconfig
+[submodule "pack/my-plugins/start/nvim-dap"]
+	path = pack/my-plugins/start/nvim-dap
+	url = https://www.github.com/mfussenegger/nvim-dap
+[submodule "pack/my-plugins/start/plenary.nvim"]
+	path = pack/my-plugins/start/plenary.nvim
+	url = https://www.github.com/nvim-lua/plenary.nvim
+[submodule "pack/my-plugins/start/rust-tools.nvim"]
+	path = pack/my-plugins/start/rust-tools.nvim
+	url = https://www.github.com/simrat39/rust-tools.nvim
+[submodule "pack/my-plugins/start/vim-surround"]
+	path = pack/my-plugins/start/vim-surround
+	url = https://www.github.com/tpope/vim-surround
+[submodule "pack/my-plugins/start/vim-indent-object"]
+	path = pack/my-plugins/start/vim-indent-object
+	url = https://www.github.com/michaeljsmith/vim-indent-object
+[submodule "pack/my-plugins/start/vim-gitgutter"]
+	path = pack/my-plugins/start/vim-gitgutter
+	url = https://www.github.com/airblade/vim-gitgutter
+[submodule "pack/my-plugins/start/twilight.nvim"]
+	path = pack/my-plugins/start/twilight.nvim
+	url = https://www.github.com/folke/twilight.nvim
+[submodule "pack/my-plugins/start/zen-mode.nvim"]
+	path = pack/my-plugins/start/zen-mode.nvim
+	url = https://www.github.com/folke/zen-mode.nvim
+[submodule "pack/my-plugins/start/trouble.nvim"]
+	path = pack/my-plugins/start/trouble.nvim
+	url = https://www.github.com/folke/trouble.nvim
+[submodule "pack/my-plugins/start/nvim-cmp"]
+	path = pack/my-plugins/start/nvim-cmp
+	url = https://www.github.com/hrsh7th/nvim-cmp
+[submodule "pack/my-plugins/start/codewindow.nvim"]
+	path = pack/my-plugins/start/codewindow.nvim
+	url = https://www.github.com/gorbit99/codewindow.nvim
+[submodule "pack/my-plugins/start/gen.nvim"]
+	path = pack/my-plugins/start/gen.nvim
+	url = https://www.github.com/David-Kunz/gen.nvim
+[submodule "pack/my-plugins/start/vim-fsharp"]
+	path = pack/my-plugins/start/vim-fsharp
+	url = https://www.github.com/PhilT/vim-fsharp
+[submodule "pack/my-plugins/start/vim-loves-dafny"]
+	path = pack/my-plugins/start/vim-loves-dafny
+	url = https://www.github.com/mlr-msft/vim-loves-dafny
+[submodule "pack/my-plugins/start/vimtex"]
+	path = pack/my-plugins/start/vimtex
+	url = https://www.github.com/lervag/vimtex
+[submodule "pack/my-plugins/start/Coqtail"]
+	path = pack/my-plugins/start/Coqtail
+	url = https://www.github.com/whonore/Coqtail
+[submodule "pack/my-plugins/start/typescript-tools.nvim"]
+	path = pack/my-plugins/start/typescript-tools.nvim
+	url = https://www.github.com/pmizio/typescript-tools.nvim
+[submodule "pack/my-plugins/start/vim-textobj-user"]
+	path = pack/my-plugins/start/vim-textobj-user
+	url = https://www.github.com/kana/vim-textobj-user
