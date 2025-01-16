@@ -94,3 +94,6 @@
 [submodule "pack/my-plugins/start/vim-textobj-user"]
 	path = pack/my-plugins/start/vim-textobj-user
 	url = https://www.github.com/kana/vim-textobj-user
+[submodule "pack/my-plugins/start/lean.nvim"]
+	path = pack/my-plugins/start/lean.nvim
+	url = https://www.github.com/Julian/lean.nvim
