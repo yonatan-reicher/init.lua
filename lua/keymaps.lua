@@ -38,12 +38,15 @@ vim.keymap.set('n', '<' , '<<')
 -- Terminal mappings
 vim.cmd [[autocmd TermOpen * startinsert]] -- Enter terminal mode automatically
 vim.keymap.set('t', '<C-t>', '<C-\\><C-n>') -- Exit terminal mode with <C-t>
-vim.opt.shell = 'nu'
-vim.opt.shellpipe = 'out+err>'
-vim.opt.shellslash = true
-vim.opt.shellredir = 'out+err>%s'
-vim.opt.shellcmdflag = '-c'
-vim.api.nvim_create_user_command('TabTerm', 'tabnew | term', {})
+-- vim.opt.shell = 'nu'
+-- vim.opt.shellpipe = 'out+err>'
+-- vim.opt.shellslash = true
+-- vim.opt.shellredir = 'out+err>%s'
+-- vim.opt.shellcmdflag = '-c'
+-- vim.opt.shellquote = ''
+-- vim.opt.shellxquote = ''
+vim.api.nvim_create_user_command('Terminal', 'terminal nu', {})
+vim.api.nvim_create_user_command('TabTerminal', 'tabnew | Terminal', {})
 
 -- :Config commands
 function ConfigInit(a)
