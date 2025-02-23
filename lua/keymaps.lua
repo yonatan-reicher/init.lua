@@ -32,6 +32,12 @@ vim.api.nvim_create_user_command('T', 'TroubleToggle', {})
 -- Use :LR for LspRestart command.
 vim.api.nvim_create_user_command('LR', 'LspRestart', {})
 
+-- Use :Size to set the window size to be up to the color column.
+-- This is hard coded but I don't care :|
+color_column = 80
+resize_to = color_column + 5
+vim.api.nvim_create_user_command('Size', 'vertical resize ' .. resize_to, {})
+
 vim.keymap.set('n', '>' , '>>')
 vim.keymap.set('n', '<' , '<<')
 
