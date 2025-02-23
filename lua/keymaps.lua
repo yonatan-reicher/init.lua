@@ -5,6 +5,10 @@ vim.g.mapleader = ' '
 vim.api.nvim_create_user_command('Date', "normal a<C-R>=strftime('%Y-%m-%d')<CR><ESC>", {
     desc = 'Inserts the current date after the cursor in ISO8086',
 })
+-- Or <C-\>date!
+vim.keymap.set('i', '<C-\\>date', "<C-R>=strftime('%Y-%m-%d')<CR>")
+-- And <C-\>time for the current time.
+vim.keymap.set('i', '<C-\\>time', "<C-R>=strftime('%H:%M')<CR>")
 
 -- Use Enter and the backslash (the key above enter) to start a newline
 -- below/above (respectivly) the current line.
