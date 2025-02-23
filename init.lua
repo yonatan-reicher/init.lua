@@ -5,6 +5,7 @@ vim.opt.packpath:append { this_dir }
 require('plugins')
 require('options')
 require('keymaps')
+require('colorscheme')
 
 -- We need to remove this useless auto-generated file
 data_path = vim.fn.stdpath('data')

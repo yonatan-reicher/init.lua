@@ -17,9 +17,6 @@ require('catppuccin').setup {
 -- is at)
 require('plugins/statusline')
 
--- Adds the tokyonight colorschemes.
-require('plugins/tokyonight')
-
 -- GitHub AI autocomplete.
 require('plugins/copilot')
 
