@@ -149,3 +149,6 @@ require('gen').command = 'wsl -e ollama run $model $prompt' -- default 'ollama r
 
 -- better typescript support!
 require("plugins/typescript-tools")
+
+-- Lean
+require('plugins/lean')
