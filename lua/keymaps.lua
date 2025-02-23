@@ -1,10 +1,6 @@
 -- The main leader key will be space.
 vim.g.mapleader = ' '
 
--- Use :Date to insert the current date.
-vim.api.nvim_create_user_command('Date', "normal a<C-R>=strftime('%Y-%m-%d')<CR><ESC>", {
-    desc = 'Inserts the current date after the cursor in ISO8086',
-})
 -- Or <C-\>date!
 vim.keymap.set('i', '<C-\\>date', "<C-R>=strftime('%Y-%m-%d')<CR>")
 -- And <C-\>time for the current time.
