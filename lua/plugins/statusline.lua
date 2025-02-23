@@ -1,4 +1,7 @@
 local gl = require('galaxyline')
+local gl_theme = require('galaxyline.theme')
+local gl_vcs = require('galaxyline.provider_vcs')
+local gl_condition = require('galaxyline.condition')
 local navic = require('nvim-navic')
 
 local gls = gl.section
@@ -18,13 +21,6 @@ local colors = {
   red = '#ec5f67'
 }
 
-local buffer_not_empty = function()
-  if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-    return true
-  end
-  return false
-end
-
 gls.left[1] = {
   ViMode = {
     provider = function()
@@ -34,13 +30,15 @@ gls.left[1] = {
           c = 'CMD',
           v = 'VIS',
           V = 'VIS',
+          t = 'TER',
+          [''] = 'VIS',
           [''] = 'VIS'
       }
       return alias[vim.fn.mode()]
     end,
     separator = '',
     separator_highlight = {colors.purple,function()
-      if not buffer_not_empty() then
+      if not gl_condition.buffer_not_empty() then
         return colors.purple
       end
       return colors.darkblue
@@ -51,14 +49,14 @@ gls.left[1] = {
 gls.left[2] ={
   FileIcon = {
     provider = 'FileIcon',
-    condition = buffer_not_empty,
+    condition = gl_condition.buffer_not_empty,
     highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.darkblue},
   },
 }
 gls.left[3] = {
   FileName = {
     provider = 'FileName',
-    condition = buffer_not_empty,
+    condition = gl_condition.buffer_not_empty,
     highlight = {colors.magenta,colors.darkblue},
   }
 }
@@ -75,15 +73,17 @@ gls.left[4] = {
 gls.left[5] = {
   GitIcon = {
     provider = function() return '  ' end,
-    condition = buffer_not_empty,
+    condition = gl_condition.buffer_not_empty,
     highlight = {colors.orange,colors.purple},
   }
 }
 gls.left[6] = {
   GitBranch = {
     provider = 'GitBranch',
-    condition = buffer_not_empty,
-    highlight = {colors.grey,colors.purple},
+    condition = gl_condition.buffer_not_empty,
+    highlight = {colors.orange,colors.purple},
+    separator = '█',
+    separator_highlight = {colors.purple,colors.purple},
   }
 }
 
@@ -107,7 +107,7 @@ gls.left[8] = {
   DiffModified = {
     provider = 'DiffModified',
     condition = checkwidth,
-    icon = ' ',
+    icon = '  ',
     highlight = {colors.orange,colors.purple},
   }
 }
@@ -115,7 +115,7 @@ gls.left[9] = {
   DiffRemove = {
     provider = 'DiffRemove',
     condition = checkwidth,
-    icon = ' ',
+    icon = '  ',
     highlight = {colors.red,colors.purple},
   }
 }
@@ -135,26 +135,54 @@ gls.left[11] = {
   }
 }
 gls.left[12] = {
-  Space = {
-    provider = function () return ' ' end
-  }
-}
-gls.left[13] = {
   DiagnosticWarn = {
     provider = 'DiagnosticWarn',
     icon = '  ',
     highlight = {colors.blue,colors.bg},
   }
 }
+
 gls.right[1] = {
-  PerCent = {
-    provider = 'LinePercent',
+  FileSize = {
+    provider = 'FileSize',
+    highlight = {colors.grey,colors.purple},
     separator = '',
     separator_highlight = {colors.purple,colors.bg},
-    highlight = {colors.grey,colors.purple},
   }
 }
 gls.right[2] = {
+  FileFormat = {
+    provider = 'FileFormat',
+    highlight = {colors.grey,colors.purple},
+  }
+}
+gls.right[3] = {
+  Space = {
+    provider = function() return ' ' end,
+    highlight = {colors.grey,colors.purple},
+  },
+}
+gls.right[4] = {
+  FileEncode = {
+    provider = 'FileEncode',
+    highlight = {colors.grey,colors.purple},
+  }
+}
+gls.right[5] = {
+  LineInfo = {
+    provider = 'LineColumn',
+    highlight = {colors.grey,colors.purple},
+    separator = '|',
+    separator_highlight = {colors.bg,colors.purple},
+  },
+}
+gls.right[6] = {
+  PerCent = {
+    provider = 'LinePercent',
+    highlight = {colors.grey,colors.purple},
+  }
+}
+gls.right[6] = {
   ScrollBar = {
     provider = 'ScrollBar',
     highlight = {colors.yellow,colors.purple},
@@ -173,7 +201,7 @@ gls.short_line_left[1] = {
 
 gls.short_line_right[1] = {
   BufferIcon = {
-    provider= 'BufferIcon',
+    provider= 'FileSize',
     separator = '',
     separator_highlight = {colors.purple,colors.bg},
     highlight = {colors.grey,colors.purple}
