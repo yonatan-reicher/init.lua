@@ -7,6 +7,9 @@ vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 
+-- Keep 2 lines above and below the cursor at all times.
+vim.opt.scrolloff = 2
+
 -- Detect filetype.
 vim.cmd("filetype on")
 -- Add koka filetype.
