@@ -15,3 +15,5 @@ if vim.fn.filereadable(filname_to_remove) == 1 then
     vim.fn.delete(filname_to_remove)
 end
 
+-- TODO:
+-- - Look into :set exrc
