@@ -4,9 +4,6 @@
 [submodule "pack/my-plugins/start/nvim-navic"]
 	path = pack/my-plugins/start/nvim-navic
 	url = https://www.github.com/SmiteshP/nvim-navic
-[submodule "pack/my-plugins/start/galaxyline.nvim"]
-	path = pack/my-plugins/start/galaxyline.nvim
-	url = https://www.github.com/glepnir/galaxyline.nvim
 [submodule "pack/my-plugins/start/nvim"]
 	path = pack/my-plugins/start/nvim
 	url = https://www.github.com/catppuccin/nvim

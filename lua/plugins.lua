@@ -12,11 +12,6 @@ require('catppuccin').setup {
     },
 }
 
--- Status line plugin.
--- The configuration uses nvim-navic (for finding what function the cursor
--- is at)
-require('plugins/statusline')
-
 -- GitHub AI autocomplete.
 require('plugins/copilot')
 
