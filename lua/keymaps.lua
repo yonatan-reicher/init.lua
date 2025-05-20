@@ -33,10 +33,13 @@ vim.api.nvim_create_user_command('T', 'TroubleToggle', {})
 vim.api.nvim_create_user_command('LR', 'LspRestart', {})
 
 -- Use :Size to set the window size to be up to the color column.
--- This is hard coded but I don't care :|
-color_column = 80
-resize_to = color_column + 5
-vim.api.nvim_create_user_command('Size', 'vertical resize ' .. resize_to, {})
+vim.api.nvim_create_user_command('Size', function()
+    local has_rnu_or_nu = vim.o.rnu or vim.o.nu
+    local color_column = vim.o.colorcolumn
+    local resize_to = color_column
+    if has_rnu_or_nu then resize_to = resize_to + 5 end
+    vim.cmd ('vertical resize ' .. resize_to)
+end, {})
 
 vim.keymap.set('n', '>' , '>>')
 vim.keymap.set('n', '<' , '<<')
