@@ -23,7 +23,16 @@ vim.keymap.set('n', '<leader>j', function()
     end
 end)
 
-vim.api.nvim_create_user_command('Hebrew', 'set rightleft | set keymap=hebrew', {})
+vim.api.nvim_create_user_command('Hebrew', function()
+    -- We could in theory keep spellchecking, and use a hebrew 'spelllang'
+    -- setting, but I couldn't find one.
+    -- TODO: Look at `:help hebrew.txt`
+    -- set keymap=hebrew
+    vim.cmd[[
+        set rightleft
+        set nospell
+    ]]
+end, {})
 vim.api.nvim_create_user_command('English', 'set norightleft | set keymap=""', {})
 
 -- Use :T for toggling Trouble.
@@ -47,15 +56,8 @@ vim.keymap.set('n', '<' , '<<')
 -- Terminal mappings
 vim.cmd [[autocmd TermOpen * startinsert]] -- Enter terminal mode automatically
 vim.keymap.set('t', '<C-t>', '<C-\\><C-n>') -- Exit terminal mode with <C-t>
--- vim.opt.shell = 'nu'
--- vim.opt.shellpipe = 'out+err>'
--- vim.opt.shellslash = true
--- vim.opt.shellredir = 'out+err>%s'
--- vim.opt.shellcmdflag = '-c'
--- vim.opt.shellquote = ''
--- vim.opt.shellxquote = ''
-vim.api.nvim_create_user_command('Terminal', 'terminal nu', {})
-vim.api.nvim_create_user_command('TabTerminal', 'tabnew | Terminal', {})
+-- TODO: Move to another file
+vim.cmd [[autocmd TermOpen * set nospell]] -- Disable spell checking in terminal buffers
 
 -- :Config commands
 function ConfigInit(a)
@@ -105,3 +107,46 @@ vim.cmd.digraphs('=M', 0x27FD) -- ⟽
 vim.cmd.digraphs('M=', 0x27FE) -- ⟾
 vim.cmd.digraphs('in', 0x2208) -- ∈
 vim.cmd.digraphs('nn', 0x2209) -- ∉
+
+-- Vim fugitive :tG should open in a new tab instead of a split.
+vim.api.nvim_create_user_command('TG', function()
+    vim.cmd('tab G')
+end, {})
+
+
+-- Why ride a bike when you can fly?
+-- https://2.bp.blogspot.com/-d1GaUBk-Y10/TyFhskmCYRI/AAAAAAAAARQ/CIEx1V7FLqg/s640/vim-and-vigor-004-flying_is_faster_than_cycling.png
+-- Honestly, <leader>fb (telescope buffer) is probably better, but this is so
+-- cool.
+vim.cmd[[
+    nnoremap <leader>l :ls<CR>:b<space>
+]]
+
+
+-- Close buffer (without closing window)
+-- https://www.reddit.com/r/vim/comments/em9qvv/a_oneline_mapping_to_cleverly_close_buffers/
+vim.keymap.set('n', '<leader>d', function()
+    local buffer_number = vim.fn.bufnr("%")
+    local buffer_info = vim.fn.getbufinfo("%")[1]
+    assert(buffer_info.bufnr == buffer_number , "Buffer number mismatch! This should not happen.")
+    local is_buffer_in_multiple_windows = #buffer_info.windows > 1
+    if is_buffer_in_multiple_windows then
+        -- Just close the window, don't delete the buffer
+        vim.cmd.close()
+    else
+        -- The buffer should be closed!
+        vim.cmd.bnext()
+        vim.cmd.bdelete(buffer_number) -- could also do `:bd #` to delete the last buffer
+    end
+end)
+
+-- Close all other buffers
+vim.api.nvim_create_user_command('CloseOtherBuffers', function()
+    local current_buffer = vim.fn.bufnr('%')
+    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+    for _, buf in ipairs(buffers) do
+        if buf.bufnr ~= current_buffer then
+            vim.cmd('bdelete! ' .. buf.bufnr)
+        end
+    end
+end, {})

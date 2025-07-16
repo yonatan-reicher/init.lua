@@ -1,1 +1,1 @@
-vim.g.VM_leader = ','
+vim.g.VM_leader = '<leader>v'
