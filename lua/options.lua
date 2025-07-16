@@ -24,7 +24,9 @@ vim.cmd("au BufRead,BufNewFile *.py setlocal formatprg=autopep8\\ -")
 
 -- Errors and things around the code.
 vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80"
+-- Limiting the number of characters in a line.
+vim.opt.colorcolumn = "81"
+vim.opt.textwidth = 80
 
 vim.opt.shortmess:append("c")
 
