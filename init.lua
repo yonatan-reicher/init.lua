@@ -8,7 +8,9 @@ require('keymaps')
 require('colorscheme')
 require('statusline')
 require('lean-files')
-require('nu')
+if vim.fn.executable('nu') == 1 then
+    require('nu')
+end
 
 -- We need to remove this useless auto-generated file
 data_path = vim.fn.stdpath('data')
