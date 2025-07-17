@@ -58,6 +58,14 @@ require("tokyonight").setup({
         highlights.StatusLineNC.bg = colors.dark_gray
         highlights['@comment.todo'] = highlights.Todo
         highlights.Special.fg = nil
+        highlights.Pmenu = colors.white
+        highlights.NormalFloat = { link = 'Pmenu' }
+        highlights.FloatShadow = { bg = colors.black, blend = 50 }
+        -- for key, value in pairs(highlights) do
+        --     if key:lower():find('float') or key:lower():find('shadow') then
+        --         print(key , ' = ' , vim.inspect(value))
+        --     end
+        -- end
     end,
 
     -- All on_colors and on_highlights table keys and default values are here:
