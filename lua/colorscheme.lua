@@ -33,6 +33,10 @@ require("tokyonight").setup({
         colors.dark_gray = util.blend(colors.gray, 0.5, colors.black)
         colors.cyan = "#9cdcfe"
         colors.soft_yellow = "#dcdcaa"
+        if vim.o.background == "light" then
+            colors.soft_yellow = util.darken(colors.soft_yellow, 18.8)
+            colors.soft_yellow = util.blend(colors.soft_yellow, 0.5, colors.yellow)
+        end
     end,
     
     --- You can override specific highlights to use other groups or a hex color
