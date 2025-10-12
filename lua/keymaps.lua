@@ -150,3 +150,7 @@ vim.api.nvim_create_user_command('CloseOtherBuffers', function()
         end
     end
 end, {})
+
+vim.keymap.set('n', 'gD', function()
+    vim.cmd[[ tab split | norm gd ]]
+end)
