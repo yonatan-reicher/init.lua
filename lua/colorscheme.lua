@@ -16,7 +16,6 @@ require("tokyonight").setup({
     --- function will be called with a ColorScheme table
     ---@param colors ColorScheme
     on_colors = function(colors) 
-        -- print(vim.inspect(colors))
         if vim.o.background == "dark" then
             colors.gray = "#2d2d30"
             colors.bg = "#1c1c1c"
