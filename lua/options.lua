@@ -31,7 +31,9 @@ vim.opt.textwidth = 80
 vim.opt.shortmess:append("c")
 
 -- Set the cmdline used by :grep.
-vim.opt.grepprg = "rg --vimgrep"
+if vim.fn.executable("rg") then
+    vim.opt.grepprg = "rg --vimgrep"
+end
 
 -- TODO:
 -- let g:copilot_assume_mapped = v:true
