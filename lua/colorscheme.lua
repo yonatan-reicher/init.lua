@@ -16,7 +16,6 @@ require("tokyonight").setup({
     --- function will be called with a ColorScheme table
     ---@param colors ColorScheme
     on_colors = function(colors) 
-        -- print(vim.inspect(colors))
         if vim.o.background == "dark" then
             colors.gray = "#2d2d30"
             colors.bg = "#1c1c1c"
@@ -31,6 +30,12 @@ require("tokyonight").setup({
             colors.bg_dark = util.blend(colors.bg, 0.5, colors.gray)
         end
         colors.dark_gray = util.blend(colors.gray, 0.5, colors.black)
+        colors.cyan = "#9cdcfe"
+        colors.soft_yellow = "#dcdcaa"
+        if vim.o.background == "light" then
+            colors.soft_yellow = util.darken(colors.soft_yellow, 18.8)
+            colors.soft_yellow = util.blend(colors.soft_yellow, 0.5, colors.yellow)
+        end
     end,
     
     --- You can override specific highlights to use other groups or a hex color
@@ -39,10 +44,13 @@ require("tokyonight").setup({
     ---@param colors ColorScheme
     on_highlights = function(highlights, colors) 
         -- highlights['@keyword'].fg = colors.blue2
+        -- print(vim.inspect(colors))
         highlights['@keyword'] = { fg = colors.purple, italic = false }
+        highlights['@keyword.import'] = '@keyword'
         highlights['@property'] = '@variable'
         highlights['@variable.member'] = '@variable'
         highlights['@variable.builtin'] = 'Special'
+        highlights.Function.fg = colors.soft_yellow
         highlights.Type.fg = colors.green1
         highlights.Constant.fg = colors.blue1
         highlights.TabLine.fg = colors.blue
