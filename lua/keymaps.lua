@@ -46,7 +46,7 @@ vim.api.nvim_create_user_command('Size', function()
     local has_rnu_or_nu = vim.o.rnu or vim.o.nu
     local color_column = vim.o.colorcolumn
     local resize_to = color_column
-    if has_rnu_or_nu then resize_to = resize_to + 5 end
+    if has_rnu_or_nu then resize_to = tonumber(resize_to) + 5 end
     vim.cmd ('vertical resize ' .. resize_to)
 end, {})
 
