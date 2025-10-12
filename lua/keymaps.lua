@@ -80,9 +80,6 @@ function Config(a)
 end
 vim.api.nvim_create_user_command('ConfigInit', ConfigInit, { nargs = '?' })
 vim.api.nvim_create_user_command('Config', Config, { nargs = '?' })
--- TODO: Why doesnt this work?
-vim.api.nvim_create_user_command('TabConfigInit', 'tabnew | ConfigInit', { nargs = '?' })
-vim.api.nvim_create_user_command('TabConfig', 'tabnew | Config', { nargs = '?' })
 
 -- Telescope bingings.
 local builtin = require('telescope.builtin')
@@ -91,6 +88,9 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
+vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
+vim.keymap.set('n', '<leader>fm', builtin.man_pages, {})
+vim.keymap.set('n', '<leader>fc', builtin.commands, {})
 vim.keymap.set('n', '<leader>fF', ':Telescope<CR>', {})
 
 -- Digraphs
@@ -123,22 +123,45 @@ vim.cmd[[
 ]]
 
 
--- Close buffer (without closing window)
--- https://www.reddit.com/r/vim/comments/em9qvv/a_oneline_mapping_to_cleverly_close_buffers/
+function GoToNextBuffer()
+end
+
+
+-- Close the current buffer, but keep the window open.
 vim.keymap.set('n', '<leader>d', function()
+    -- Get the current buffer, and start going back through the jump list until
+    -- we reach a buffer that is not the current one. If we don't, we just go to
+    -- the next buffer
     local buffer_number = vim.fn.bufnr("%")
-    local buffer_info = vim.fn.getbufinfo("%")[1]
-    assert(buffer_info.bufnr == buffer_number , "Buffer number mismatch! This should not happen.")
-    local is_buffer_in_multiple_windows = #buffer_info.windows > 1
-    if is_buffer_in_multiple_windows then
-        -- Just close the window, don't delete the buffer
-        vim.cmd.close()
-    else
-        -- The buffer should be closed!
-        vim.cmd.bnext()
-        vim.cmd.bdelete(buffer_number) -- could also do `:bd #` to delete the last buffer
+    local i = vim.fn.getjumplist()[2]
+    while i > 0 and vim.fn.bufnr('%') == buffer_number do
+        vim.cmd[[exe "normal \<c-o>"]]
+        i = i - 1
     end
+    local found = i > 0
+    if not found then
+        vim.cmd.bnext()
+    end
+    vim.cmd.bdelete(buffer_number)
 end)
+
+-- Close the current buffer, and go to the next one.
+vim.keymap.set('n', '<leader>bd', function()
+    local buffer_number = vim.fn.bufnr("%")
+    vim.cmd.bnext()
+    vim.cmd.bdelete(buffer_number)
+end)
+    -- local buffer_info = vim.fn.getbufinfo("%")[1]
+    -- assert(buffer_info.bufnr == buffer_number , "Buffer number mismatch! This should not happen.")
+    -- local is_buffer_in_multiple_windows = #buffer_info.windows > 1
+    -- if is_buffer_in_multiple_windows then
+    --     -- Just close the window, don't delete the buffer
+    --     vim.cmd.close()
+    -- else
+    --     -- The buffer should be closed!
+    --     vim.cmd.bnext()
+    --     vim.cmd.bdelete(buffer_number) -- could also do `:bd #` to delete the last buffer
+    -- end
 
 -- Close all other buffers
 vim.api.nvim_create_user_command('CloseOtherBuffers', function()
@@ -147,6 +170,16 @@ vim.api.nvim_create_user_command('CloseOtherBuffers', function()
     for _, buf in ipairs(buffers) do
         if buf.bufnr ~= current_buffer then
             vim.cmd('bdelete! ' .. buf.bufnr)
+        end
+    end
+end, {})
+
+-- Close all buffers that are not open in any window
+vim.api.nvim_create_user_command('CloseUnusedBuffers', function()
+    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+    for _, buf in ipairs(buffers) do
+        if #buf.windows == 0 then
+            vim.cmd.bdelete(buf.bufnr)
         end
     end
 end, {})

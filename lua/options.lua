@@ -23,7 +23,7 @@ vim.cmd("au BufRead,BufNewFile *.pl  set filetype=prolog | set syntax=prolog")
 vim.cmd("au BufRead,BufNewFile *.py setlocal formatprg=autopep8\\ -")
 
 -- Errors and things around the code.
-vim.opt.signcolumn = 'number'
+vim.opt.signcolumn = 'yes'
 -- Limiting the number of characters in a line.
 vim.opt.colorcolumn = "81"
 vim.opt.textwidth = 80
