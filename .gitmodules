@@ -61,9 +61,6 @@
 [submodule "pack/my-plugins/start/zen-mode.nvim"]
 	path = pack/my-plugins/start/zen-mode.nvim
 	url = https://www.github.com/folke/zen-mode.nvim
-[submodule "pack/my-plugins/start/trouble.nvim"]
-	path = pack/my-plugins/start/trouble.nvim
-	url = https://www.github.com/folke/trouble.nvim
 [submodule "pack/my-plugins/start/nvim-cmp"]
 	path = pack/my-plugins/start/nvim-cmp
 	url = https://www.github.com/hrsh7th/nvim-cmp
