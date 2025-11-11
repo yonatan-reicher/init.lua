@@ -106,13 +106,6 @@ require('zen-mode').setup {}
 --     end,
 -- }
 
--- Dispalying lists.
-require("trouble").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-}
-
 -- -- Completion engine!
 -- use {
 -- 'hrsh7th/nvim-cmp',
