@@ -69,6 +69,17 @@ require("tokyonight").setup({
         highlights.Pmenu = colors.white
         highlights.NormalFloat = { link = 'Pmenu' }
         highlights.FloatShadow = { bg = colors.black, blend = 50 }
+        -- Markdown
+        -- Markdown already looks like what it renders to, so we want as little
+        -- colors as possible while providing useful text decoration.
+        highlights['@markup.heading.1.markdown'] = { bold = true }
+        highlights['@markup.heading.2.markdown'] = { bold = true }
+        highlights['@markup.heading.3.markdown'] = { bold = true }
+        highlights['@markup.heading.4.markdown'] = { bold = true }
+        highlights['@markup.heading.5.markdown'] = { bold = true }
+        highlights['@markup.heading.6.markdown'] = { bold = true }
+        highlights['@markup.raw.markdown_inline'] = { bg = colors.dark_gray }
+        highlights['@markup.list.markdown'] = {}
         -- for key, value in pairs(highlights) do
         --     if key:lower():find('float') or key:lower():find('shadow') then
         --         print(key , ' = ' , vim.inspect(value))
