@@ -16,6 +16,7 @@ require("tokyonight").setup({
     --- function will be called with a ColorScheme table
     ---@param colors ColorScheme
     on_colors = function(colors) 
+        colors.cyan = "#9cdcfe"
         if vim.o.background == "dark" then
             colors.gray = "#2d2d30"
             colors.bg = "#1c1c1c"
@@ -28,9 +29,10 @@ require("tokyonight").setup({
             colors.fg = "#101030"
             colors.green1 = "#43b07d"
             colors.bg_dark = util.blend(colors.bg, 0.5, colors.gray)
+            colors.cyan = util.blend(util.darken(colors.cyan, 1.4), 0.7, colors.blue1)
+            -- colors.cyan = "#8cbcfe"
         end
         colors.dark_gray = util.blend(colors.gray, 0.5, colors.black)
-        colors.cyan = "#9cdcfe"
         colors.soft_yellow = "#dcdcaa"
         if vim.o.background == "light" then
             colors.soft_yellow = util.darken(colors.soft_yellow, 18.8)
