@@ -108,7 +108,7 @@ vim.cmd.digraphs('M=', 0x27FE) -- ⟾
 vim.cmd.digraphs('in', 0x2208) -- ∈
 vim.cmd.digraphs('nn', 0x2209) -- ∉
 
--- Vim fugitive :tG should open in a new tab instead of a split.
+-- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
     vim.cmd('tab G')
 end, {})
