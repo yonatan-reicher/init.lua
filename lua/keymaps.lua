@@ -114,6 +114,14 @@ vim.api.nvim_create_user_command('TG', function()
 end, {})
 
 
+vim.keymap.set('n', '<leader>c', function()
+    vim.cmd 'G commit'
+    vim.cmd.norm 'Gk$yiWgg'
+    vim.cmd.norm 'aupdate '
+    vim.cmd.norm 'p$'
+end)
+
+
 -- Why ride a bike when you can fly?
 -- https://2.bp.blogspot.com/-d1GaUBk-Y10/TyFhskmCYRI/AAAAAAAAARQ/CIEx1V7FLqg/s640/vim-and-vigor-004-flying_is_faster_than_cycling.png
 -- Honestly, <leader>fb (telescope buffer) is probably better, but this is so
