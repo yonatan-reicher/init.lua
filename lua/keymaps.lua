@@ -107,6 +107,7 @@ vim.cmd.digraphs('=M', 0x27FD) -- ⟽
 vim.cmd.digraphs('M=', 0x27FE) -- ⟾
 vim.cmd.digraphs('in', 0x2208) -- ∈
 vim.cmd.digraphs('nn', 0x2209) -- ∉
+vim.cmd.digraphs('JO', 0x2A1D) -- ⨝
 
 -- Vim fugitive :tG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
