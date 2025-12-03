@@ -140,3 +140,6 @@ require("plugins/typescript-tools")
 
 -- Lean
 require('plugins/lean')
+
+-- Taboo - tab renaming!
+require('plugins/taboo')

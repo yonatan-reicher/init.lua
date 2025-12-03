@@ -91,3 +91,6 @@
 [submodule "pack/my-plugins/start/lean.nvim"]
 	path = pack/my-plugins/start/lean.nvim
 	url = https://www.github.com/Julian/lean.nvim
+[submodule "pack/my-plugins/start/taboo.vim"]
+	path = pack/my-plugins/start/taboo.vim
+	url = https://github.com/gcmt/taboo.vim

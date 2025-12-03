@@ -109,10 +109,18 @@ vim.cmd.digraphs('in', 0x2208) -- ∈
 vim.cmd.digraphs('nn', 0x2209) -- ∉
 vim.cmd.digraphs('JO', 0x2A1D) -- ⨝
 
--- Vim fugitive :tG should open in a new tab instead of a split.
+-- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
     vim.cmd('tab G')
 end, {})
+
+
+vim.keymap.set('n', '<leader>c', function()
+    vim.cmd 'G commit'
+    vim.cmd.norm 'Gk$yiWgg'
+    vim.cmd.norm 'aupdate '
+    vim.cmd.norm 'p$'
+end)
 
 
 -- Why ride a bike when you can fly?
