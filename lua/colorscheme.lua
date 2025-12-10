@@ -87,6 +87,7 @@ require("tokyonight").setup({
         --         print(key , ' = ' , vim.inspect(value))
         --     end
         -- end
+        highlights['Highlight'] = { fg = colors.black, bg = colors.yellow, bold = true }
     end,
 
     -- All on_colors and on_highlights table keys and default values are here:
