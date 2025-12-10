@@ -94,3 +94,6 @@
 [submodule "pack/my-plugins/start/taboo.vim"]
 	path = pack/my-plugins/start/taboo.vim
 	url = https://github.com/gcmt/taboo.vim
+[submodule "pack/my-plugins/start/render-markdown.nvim"]
+	path = pack/my-plugins/start/render-markdown.nvim
+	url = https://github.com/MeanderingProgrammer/render-markdown.nvim
