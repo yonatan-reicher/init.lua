@@ -5,6 +5,8 @@ vim.g.mapleader = ' '
 vim.keymap.set('i', '<C-\\>date', "<C-R>=strftime('%Y-%m-%d')<CR>")
 -- And <C-\>time for the current time.
 vim.keymap.set('i', '<C-\\>time', "<C-R>=strftime('%H:%M')<CR>")
+vim.keymap.set('i', '<C-\\>day', "<C-R>=strftime('%A')<CR>")
+vim.keymap.set('i', '<C-\\>month', "<C-R>=strftime('%B')<CR>")
 
 -- Use Enter and the backslash (the key above enter) to start a newline
 -- below/above (respectivly) the current line.
