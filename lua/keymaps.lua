@@ -12,6 +12,8 @@ vim.keymap.set('i', '<C-\\>month', "<C-R>=strftime('%B')<CR>")
 -- below/above (respectivly) the current line.
 vim.keymap.set('n', '<CR>', 'o<ESC>')
 vim.keymap.set('n', '\\', 'O<ESC>')
+-- I run this all the time...
+vim.keymap.set('n', '<leader>w', ':w | noh<CR>')
 
 -- Prefix k/j with the leader key to move the current line up/down.
 vim.keymap.set('n', '<leader>k', function()
@@ -24,6 +26,24 @@ vim.keymap.set('n', '<leader>j', function()
         vim.fn.execute('m+')
     end
 end)
+
+-- Find and center
+vim.keymap.set('n', 'n', 'nzzzv')
+vim.keymap.set('n', 'N', 'Nzzzv')
+
+-- Stay in indent mode
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+
+-- set line wrap
+vim.keymap.set('n', '<leader>lw', ':set wrap! <CR>', { desc = 'Toggle line wrap' })
+
+-- Cycle through the buffers
+vim.keymap.set('n', '<Tab>', ':bnext<CR>')
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>')
+
+vim.keymap.set('n', '<C-w>[', function() vim.cmd('vertical resize -5') end, { desc = 'Shrink window width' })
+vim.keymap.set('n', '<C-w>]', function() vim.cmd('vertical resize +5') end, { desc = 'Increase window width' })
 
 vim.api.nvim_create_user_command('Hebrew', function()
     -- We could in theory keep spellchecking, and use a hebrew 'spelllang'
@@ -113,7 +133,7 @@ vim.cmd.digraphs('JO', 0x2A1D) -- ⨝
 
 -- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
-    vim.cmd('tab G')
+    vim.cmd('tab G | TabooRename git')
 end, {})
 
 
@@ -198,3 +218,30 @@ end, {})
 vim.keymap.set('n', 'gD', function()
     vim.cmd[[ tab split | norm gd ]]
 end)
+
+
+local function get_text(pos1, pos2)
+    local n_lines = math.abs(pos2[2] - pos1[2]) + 1
+    local lines = vim.api.nvim_buf_get_lines(0, pos1[2] - 1, pos2[2], false)
+    lines[1] = string.sub(lines[1], pos1[3], -1)
+    if n_lines == 1 then
+        lines[n_lines] = string.sub(lines[n_lines], 1, pos2[3] - pos1[3] + 1)
+    else
+        lines[n_lines] = string.sub(lines[n_lines], 1, pos2[3])
+    end
+    return table.concat(lines, '\n')
+end
+
+
+vim.api.nvim_create_user_command('Cap', function()
+    local pos1 = vim.fn.getpos("'<")
+    local pos2 = vim.fn.getpos("'>")
+
+    local sel = get_text(pos1, pos2)
+    vim.cmd.norm(#sel .. 'x')
+    -- TODO
+    -- vim.cmd.
+
+    vim.fn.setpos("'<", s_start)
+    vim.fn.setpos("'>", s_end)
+end, {})

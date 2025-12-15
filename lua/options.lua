@@ -86,26 +86,5 @@ vim.opt.smartcase = true
 vim.opt.inccommand = 'split'
 vim.opt.breakindent = true
 vim.opt.splitright = true
-vim.opt.splitbelow = true
+-- vim.opt.splitbelow = true
 vim.opt.winborder = 'rounded'
-
-local opts = { noremap = true, silent = true }
-
--- Find and center
-vim.keymap.set('n', 'n', 'nzzzv', opts)
-vim.keymap.set('n', 'N', 'Nzzzv', opts)
-
--- Stay in indent mode
-vim.keymap.set('v', '<', '<gv', opts)
-vim.keymap.set('v', '>', '>gv', opts)
-
--- set line wrap
-vim.keymap.set('n', '<leader>lw', ':set wrap! <CR>', { desc = 'Toggle line wrap' })
-
--- Cycle through the buffers
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
-
--- Resize windows with <leader>w[/]
-vim.keymap.set('n', '<leader>w[', function() vim.cmd('vertical resize -5') end, { desc = 'Shrink window width' })
-vim.keymap.set('n', '<leader>w]', function() vim.cmd('vertical resize +5') end, { desc = 'Increase window width' })
