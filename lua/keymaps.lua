@@ -38,9 +38,8 @@ vim.keymap.set('v', '>', '>gv')
 -- set line wrap
 vim.keymap.set('n', '<leader>lw', ':set wrap! <CR>', { desc = 'Toggle line wrap' })
 
--- Cycle through the buffers
-vim.keymap.set('n', '<Tab>', ':bnext<CR>')
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>')
+vim.keymap.set('n', '<Tab>', ':tabnext<CR>')
+vim.keymap.set('n', '<S-Tab>', ':tabprev<CR>')
 
 vim.keymap.set('n', '<C-w>[', function() vim.cmd('vertical resize -5') end, { desc = 'Shrink window width' })
 vim.keymap.set('n', '<C-w>]', function() vim.cmd('vertical resize +5') end, { desc = 'Increase window width' })
