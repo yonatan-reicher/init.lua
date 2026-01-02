@@ -116,6 +116,7 @@ vim.keymap.set('n', '<leader>fF', ':Telescope<CR>', {})
 
 -- Digraphs
 vim.keymap.set('i', '<C-\\>', '<C-k>')
+-- Digraphs are added via their UTF-16 code point.
 vim.cmd.digraphs('-m', 0x21A4) -- ↤
 vim.cmd.digraphs('m^', 0x21A5) -- ↥
 vim.cmd.digraphs('m-', 0x21A6) -- ↦
@@ -129,6 +130,8 @@ vim.cmd.digraphs('M=', 0x27FE) -- ⟾
 vim.cmd.digraphs('in', 0x2208) -- ∈
 vim.cmd.digraphs('nn', 0x2209) -- ∉
 vim.cmd.digraphs('JO', 0x2A1D) -- ⨝
+vim.cmd.digraphs('ns', 0x2099) -- ₙ
+vim.cmd.digraphs('ms', 0x2098) -- ₘ
 
 -- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
