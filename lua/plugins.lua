@@ -143,3 +143,23 @@ require('plugins/lean')
 
 -- Taboo - tab renaming!
 require('plugins/taboo')
+
+-- Render markdown
+require('render-markdown').setup {
+    -- Enable LSP-based completions.
+    completions = { lsp = { enabled = true } },
+    -- Render on all vim modes.
+    render_modes = true,
+    -- Simpler headings
+    heading = {
+        sign = false,
+        width = 'block',
+        icons = '',
+    },
+    -- Simpler bullets
+    bullet = {
+        highlight = '',
+        -- Icons taken from VSCode markdown rendering.
+        icons = { '•', '◦', '▪' },
+    },
+}
