@@ -86,7 +86,5 @@ vim.opt.smartcase = true
 vim.opt.inccommand = 'split'
 vim.opt.breakindent = true
 vim.opt.splitright = true
--- vim.opt.splitbelow = true
-vim.opt.winborder = 'rounded'
 
 vim.opt.virtualedit:append 'block'

@@ -9,7 +9,6 @@ t.setup {
             center = {
             },
         },
-        border = false,
     },
     pickers = {
         find_files = {
@@ -18,11 +17,9 @@ t.setup {
                 height = 15,
             },
             path_display = { 'smart', 'filename_first' },
-            border = false,
         },
         live_grep = {
             layout_strategy = 'vertical',
-            border = false,
         },
     },
 }
