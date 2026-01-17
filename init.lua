@@ -9,6 +9,7 @@ require('keymaps')
 require('colorscheme')
 require('statusline')
 require('lean-files')
+require('rust')
 require('project-local-configuration')
 if vim.fn.executable('nu') == 1 then
     require('nu')
