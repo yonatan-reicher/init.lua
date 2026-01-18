@@ -143,7 +143,10 @@ vim.cmd.digraphs('ms', 0x2098) -- ₘ
 
 -- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
-    vim.cmd('tab G | TabooRename git')
+    vim.cmd[[
+        tab G
+        TabooRename git
+    ]]
 end, {})
 
 
