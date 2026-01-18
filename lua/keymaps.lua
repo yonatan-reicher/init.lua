@@ -71,6 +71,14 @@ vim.api.nvim_create_user_command('Size', function()
     vim.cmd ('vertical resize ' .. resize_to)
 end, {})
 
+vim.api.nvim_create_user_command('Term', function()
+    vim.cmd[[
+        tabnew
+        TabooRename term
+        terminal
+    ]]
+end, {})
+
 vim.keymap.set('n', '>' , '>>')
 vim.keymap.set('n', '<' , '<<')
 
