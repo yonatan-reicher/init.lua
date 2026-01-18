@@ -10,6 +10,7 @@ require('colorscheme')
 require('statusline')
 require('lean-files')
 require('project-local-configuration')
+require('obsidian')
 if vim.fn.executable('nu') == 1 then
     require('nu')
 end
