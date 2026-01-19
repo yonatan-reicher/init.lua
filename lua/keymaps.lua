@@ -14,6 +14,15 @@ vim.keymap.set('n', '<CR>', 'o<ESC>')
 vim.keymap.set('n', '\\', 'O<ESC>')
 -- I run this all the time...
 vim.keymap.set('n', '<leader>w', ':w | noh<CR>')
+vim.keymap.set('n', '<leader>bg', function()
+    -- Called 'bg' because I used to use `:set bg=`.
+    local current = vim.o.background
+    if current == 'dark' then
+        vim.o.background = 'light'
+    else
+        vim.o.background = 'dark'
+    end
+end, { desc = 'Toggle the current background color' })
 
 -- Prefix k/j with the leader key to move the current line up/down.
 vim.keymap.set('n', '<leader>k', function()
