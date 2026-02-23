@@ -28,6 +28,9 @@ vim.opt.signcolumn = 'yes'
 -- Limiting the number of characters in a line.
 vim.opt.colorcolumn = "81"
 vim.opt.textwidth = 80
+-- Only break the line automatically if the line was shorter that `textwidth`
+-- before
+vim.opt.formatoptions:append 'l'
 
 vim.opt.shortmess:append("c")
 
