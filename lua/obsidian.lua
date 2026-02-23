@@ -23,10 +23,12 @@ end
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'markdown',
-    callback = function()
+    callback = function(args)
         vim.schedule(function()
-            vim.keymap.set('n', 'K', function()
-            end, { buffer = true, desc = 'Follow wiki-link link under cursor' })
+            vim.keymap.set('n', 'K', followWikiLink, {
+                buffer = args.buf,
+                desc = 'Follow wiki-link link under cursor',
+            })
         end)
     end,
 })
