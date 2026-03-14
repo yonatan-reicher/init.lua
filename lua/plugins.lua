@@ -1,25 +1,50 @@
-require('nvim-navic').setup {
-    lsp = { auto_attach = true },
-}
+function moduleExists(name)
+  if package.loaded[name] then
+    return true
+  else
+    for _, searcher in ipairs(package.searchers or package.loaders) do
+      local loader = searcher(name)
+      if type(loader) == 'function' then
+        package.preload[name] = loader
+        return true
+      end
+    end
+    return false
+  end
+end
+
+if moduleExists 'nvim-navic' then
+    require('nvim-navic').setup {
+        lsp = { auto_attach = true },
+    }
+end
 
 -- Install as secondary plugin for nvim-navic icon colors.
-require('catppuccin').setup {
-    integrations = {
-        navic = {
-            enabled = false,
-            custom_bg = "NONE",
+if moduleExists 'catppuccin' then
+    require('catppuccin').setup {
+        integrations = {
+            navic = {
+                enabled = false,
+                custom_bg = "NONE",
+            },
         },
-    },
-}
+    }
+end
 
 -- GitHub AI autocomplete.
-require('plugins/copilot')
+-- It starts automatically, no need to require anything!~
+vim.g.copilot_file_types = {
+    koka = true,
+    markdown = true,
+}
 
--- Multiple cursors functionality.
-require('plugins/vim-visual-multi')
+-- vim-visual-multi - Multiple cursors functionality.
+vim.g.VM_leader = '<leader>v'
 
 -- Leap - Amazing s and f commands.
-require('plugins/leap')
+if moduleExists 'leap' then
+    require('leap').add_default_mappings()
+end
 
 -- Treesitter for Ast parsing!
 -- Note: There are additional installation instructions
@@ -32,68 +57,75 @@ require('plugins/treesitter')
 require('plugins/telescope')
 
 -- Automatic Lsp Configurations.
-require('plugins/nvim-lspconfig')
+    require('plugins/nvim-lspconfig')
 
 -- Debugging
 -- TODO: move to a configuration file.
-local dap = require('dap')
-dap.adapters.lldb = {
-    type = 'executable',
-    command = 'C:/Program Files/LLVM/bin/lldb-vscode', -- must be absolute path
-    name = "lldb"
-}
-dap.configurations.cpp = {
-    {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
-        program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = {},
-    },
-}
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = {
-    {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
-        program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-        args = {},
-        initCommands = function()
-            -- Find out where to look for the pretty printer Python module
-            local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
-
-            local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
-            local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
-
-            local commands = {}
-            local file = io.open(commands_file, 'r')
-            if file then
-                for line in file:lines() do
-                    table.insert(commands, line)
+if moduleExists 'dap' then
+    local dap = require('dap')
+    dap.adapters.lldb = {
+        type = 'executable',
+        command = 'C:/Program Files/LLVM/bin/lldb-vscode', -- must be absolute path
+        name = "lldb"
+    }
+    dap.configurations.cpp = {
+        {
+            name = 'Launch',
+            type = 'lldb',
+            request = 'launch',
+            program = function()
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+            stopOnEntry = false,
+            args = {},
+        },
+    }
+    dap.configurations.c = dap.configurations.cpp
+    dap.configurations.rust = {
+        {
+            name = 'Launch',
+            type = 'lldb',
+            request = 'launch',
+            program = function()
+                return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            end,
+            cwd = '${workspaceFolder}',
+            stopOnEntry = false,
+            args = {},
+            initCommands = function()
+                -- Find out where to look for the pretty printer Python module
+                local rustc_sysroot = vim.fn.trim(vim.fn.system('rustc --print sysroot'))
+    
+                local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
+                local commands_file = rustc_sysroot .. '/lib/rustlib/etc/lldb_commands'
+    
+                local commands = {}
+                local file = io.open(commands_file, 'r')
+                if file then
+                    for line in file:lines() do
+                        table.insert(commands, line)
+                    end
+                    file:close()
                 end
-                file:close()
-            end
-            table.insert(commands, 1, script_import)
-
-            return commands
-        end,
-    },
-}
+                table.insert(commands, 1, script_import)
+    
+                return commands
+            end,
+        },
+    }
+end
 
 -- Automatic rust configurations.
 require('plugins/rust-tools')
 
-require('twilight').setup {}
-require('zen-mode').setup {}
+if moduleExists 'twilight' then
+    require('twilight').setup {}
+end
+
+if moduleExists 'zen-mode' then
+    require('zen-mode').setup {}
+end
 
 -- use {
 --     "Maan2003/lsp_lines.nvim",
@@ -126,40 +158,52 @@ require('zen-mode').setup {}
 -- <leader>mc close
 -- <leader>mo open
 -- <leader>mf focus
-local codewindow = require('codewindow')
-codewindow.setup()
-codewindow.apply_default_keybinds()
+if moduleExists 'codewindow' then
+    local codewindow = require('codewindow')
+    codewindow.setup()
+    codewindow.apply_default_keybinds()
+end
 
 -- LLM generation.
 vim.keymap.set('v', '<leader>]', ':Gen<CR>')
 vim.keymap.set('n', '<leader>]', ':Gen<CR>')
-require('gen').command = 'wsl -e ollama run $model $prompt' -- default 'ollama run $model $prompt'
+if moduleExists 'gen' then
+    require('gen').command = 'wsl -e ollama run $model $prompt' -- default 'ollama run $model $prompt'
+end
 
 -- better typescript support!
-require("plugins/typescript-tools")
+if moduleExists 'typescript-tools' then
+    require('typescript-tools').setup({})
+end
 
 -- Lean
-require('plugins/lean')
+if moduleExists 'lean' then
+    require('lean').setup {
+        mappings = true,
+    }
+end
 
 -- Taboo - tab renaming!
-require('plugins/taboo')
+vim.opt.sessionoptions:append { 'tabpages', 'globals' }
 
 -- Render markdown
-require('render-markdown').setup {
-    -- Enable LSP-based completions.
-    completions = { lsp = { enabled = true } },
-    -- Render on all vim modes.
-    render_modes = true,
-    -- Simpler headings
-    heading = {
-        sign = false,
-        width = 'block',
-        icons = '',
-    },
-    -- Simpler bullets
-    bullet = {
-        highlight = '',
-        -- Icons taken from VSCode markdown rendering.
-        icons = { '•', '◦', '▪' },
-    },
-}
+if moduleExists 'render-markdown' then
+    require('render-markdown').setup {    
+        -- Enable LSP-based completions.
+        completions = { lsp = { enabled = true } },
+        -- Render on all vim modes.
+        render_modes = true,
+        -- Simpler headings
+        heading = {
+            sign = false,
+            width = 'block',
+            icons = '',
+        },
+        -- Simpler bullets
+        bullet = {
+            highlight = '',
+            -- Icons taken from VSCode markdown rendering.
+            icons = { '•', '◦', '▪' },
+        },
+    }
+end

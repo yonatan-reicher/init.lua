@@ -1,3 +1,9 @@
+if not moduleExists 'tokyonight' then
+    vim.cmd.colorscheme 'habamax'
+    vim.cmd.highlight 'Normal ctermfg=250 ctermbg=16 guifg=#bcbcbc guibg=#00000000'
+    return
+end
+
 util = require("tokyonight.util")
 require("tokyonight").setup({
     style = "night",

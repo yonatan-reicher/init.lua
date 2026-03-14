@@ -120,16 +120,18 @@ vim.api.nvim_create_user_command('ConfigInit', ConfigInit, { nargs = '?' })
 vim.api.nvim_create_user_command('Config', Config, { nargs = '?' })
 
 -- Telescope bingings.
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
-vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
-vim.keymap.set('n', '<leader>fm', builtin.man_pages, {})
-vim.keymap.set('n', '<leader>fc', builtin.commands, {})
-vim.keymap.set('n', '<leader>fF', ':Telescope<CR>', {})
+if moduleExists 'telescope.builtin' then
+    local builtin = require('telescope.builtin')
+    vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+    vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+    vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+    vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
+    vim.keymap.set('n', '<leader>fj', builtin.jumplist, {})
+    vim.keymap.set('n', '<leader>fm', builtin.man_pages, {})
+    vim.keymap.set('n', '<leader>fc', builtin.commands, {})
+    vim.keymap.set('n', '<leader>fF', ':Telescope<CR>', {})
+end
 
 -- Digraphs
 vim.keymap.set('i', '<C-\\>', '<C-k>')

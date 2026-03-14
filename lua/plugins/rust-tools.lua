@@ -1,3 +1,7 @@
+if not moduleExists 'rust-tools' then
+    return
+end
+
 rt = require("rust-tools")
 
 rt.setup({
