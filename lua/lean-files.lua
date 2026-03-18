@@ -1,4 +1,5 @@
--- NOTE: This file is not named lean.lua because it conflicts with the plugin name for lean.
+-- NOTE: This file is not named lean.lua because it conflicts with the plugin
+-- name for lean.
 
 -- TODO: Move require('lean') for the lean plugin to this file.
 
