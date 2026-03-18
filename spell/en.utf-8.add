@@ -206,3 +206,5 @@ shader
 config
 Toolchain
 th
+SMT
+smt
