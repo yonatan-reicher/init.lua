@@ -5,6 +5,8 @@ function followWikiLink()
     local potential_paths = {
         dir .. '/' .. wiki_link,
         dir .. '/' .. wiki_link .. '.md',
+        wiki_link,
+        wiki_link .. '.md',
     }
     local path = ''
     for _, p in ipairs(potential_paths) do
