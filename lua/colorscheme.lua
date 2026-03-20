@@ -31,7 +31,7 @@ require("tokyonight").setup({
             colors.green1 = "#4ec9b0"
         else
             colors.gray = "#dddded"
-            colors.bg = "#fdfdfd"
+            colors.bg = "#e1e5e1"
             colors.fg = "#101030"
             colors.green1 = "#43b07d"
             colors.bg_dark = util.blend(colors.bg, 0.5, colors.gray)
