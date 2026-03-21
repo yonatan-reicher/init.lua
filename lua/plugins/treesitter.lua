@@ -1,5 +1,4 @@
 if moduleExists 'nvim-treesitter' then
-    print('Loading treesitter.lua')
     require('nvim-treesitter.configs').setup {
         -- A directory to install the parsers into.
         -- If this is excluded or nil parsers are installed
