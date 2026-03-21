@@ -119,12 +119,25 @@ end
 -- Automatic rust configurations.
 require('plugins/rust-tools')
 
+-- Dims code around the cursor. `:Twilight`. Also needed for `zen-mode`.
 if moduleExists 'twilight' then
-    require('twilight').setup {}
+    require('twilight').setup {
+        dimming = {
+            alpha = 0.75,
+            inactive = true, -- Dim other windows too.
+        },
+        treesitter = true,
+        context = 15,
+    }
 end
 
 if moduleExists 'zen-mode' then
-    require('zen-mode').setup {}
+    require('zen-mode').setup {
+        window = {
+            width = 100,
+        },
+    }
+    vim.keymap.set('n', '<leader>z', ':Z<CR>')
 end
 
 -- use {
