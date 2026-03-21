@@ -43,9 +43,6 @@
 [submodule "pack/my-plugins/start/plenary.nvim"]
 	path = pack/my-plugins/start/plenary.nvim
 	url = https://www.github.com/nvim-lua/plenary.nvim
-[submodule "pack/my-plugins/start/rust-tools.nvim"]
-	path = pack/my-plugins/start/rust-tools.nvim
-	url = https://www.github.com/simrat39/rust-tools.nvim
 [submodule "pack/my-plugins/start/vim-surround"]
 	path = pack/my-plugins/start/vim-surround
 	url = https://www.github.com/tpope/vim-surround
