@@ -27,7 +27,7 @@
 	url = https://www.github.com/Julian/vim-textobj-variable-segment
 [submodule "pack/my-plugins/start/leap.nvim"]
 	path = pack/my-plugins/start/leap.nvim
-	url = https://www.github.com/ggandor/leap.nvim
+	url = https://codeberg.org/andyg/leap.nvim.git
 [submodule "pack/my-plugins/start/nvim-treesitter"]
 	path = pack/my-plugins/start/nvim-treesitter
 	url = https://www.github.com/nvim-treesitter/nvim-treesitter

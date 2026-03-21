@@ -1,18 +1,3 @@
-function moduleExists(name)
-  if package.loaded[name] then
-    return true
-  else
-    for _, searcher in ipairs(package.searchers or package.loaders) do
-      local loader = searcher(name)
-      if type(loader) == 'function' then
-        package.preload[name] = loader
-        return true
-      end
-    end
-    return false
-  end
-end
-
 if moduleExists 'nvim-navic' then
     require('nvim-navic').setup {
         lsp = { auto_attach = true },
@@ -55,9 +40,6 @@ require('plugins/treesitter')
 
 -- Fuzzy finder.
 require('plugins/telescope')
-
--- Automatic Lsp Configurations.
-require('plugins/nvim-lspconfig')
 
 -- Debugging
 -- TODO: move to a configuration file.
@@ -115,9 +97,6 @@ if moduleExists 'dap' then
         },
     }
 end
-
--- Automatic rust configurations.
-require('plugins/rust-tools')
 
 -- Dims code around the cursor. `:Twilight`. Also needed for `zen-mode`.
 if moduleExists 'twilight' then
