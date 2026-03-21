@@ -57,7 +57,7 @@ require('plugins/treesitter')
 require('plugins/telescope')
 
 -- Automatic Lsp Configurations.
-    require('plugins/nvim-lspconfig')
+require('plugins/nvim-lspconfig')
 
 -- Debugging
 -- TODO: move to a configuration file.
