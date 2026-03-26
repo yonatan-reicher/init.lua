@@ -26,7 +26,7 @@ require("tokyonight").setup({
         if vim.o.background == "dark" then
             colors.gray = "#2d2d30"
             colors.bg = "#1c1c1c"
-            colors.bg_dark = util.blend(colors.bg, 0.35, colors.black)
+            colors.bg_dark = "#000000"
             colors.comment = "#6d7481"
             colors.green1 = "#4ec9b0"
         else
