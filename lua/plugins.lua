@@ -199,3 +199,49 @@ if moduleExists 'render-markdown' then
         },
     }
 end
+
+require 'mini.icons' .setup {}
+
+-- A file tree viewer
+if moduleExists 'fyler' then
+    local fyler = require 'fyler'
+    fyler.setup {
+        views = {
+            finder = {
+                default_explorer = true,
+                delete_to_trash = true,
+                icon = {
+                    directory_empty = _G.MiniIcons.get('directory', 'nf-md-folder_outline'),
+                    directory_expanded = '󰝰',
+                    directory_collapsed = nil,
+                },
+            },
+        },
+    }
+    vim.keymap.set('n', '<leader>e', function() fyler.open {
+        dir = vim.fn.expand('%:h'),
+        kind = 'split_left_most',
+    } end, {
+        desc = "File explorer in the file's directory"
+    })
+    vim.keymap.set('n', '<leader>E.', function() fyler.open {
+        dir = vim.fn.getcwd(),
+        kind = 'split_left_most',
+    } end, {
+        desc = 'File explorer in the current working directory'
+    })
+    vim.api.nvim_create_autocmd({'FileType'}, {
+        pattern = 'fyler',
+        callback = function(event)
+            -- In-Fyler Key-maps and options
+            vim.wo.spell = false
+            vim.keymap.set('n', '<C-l>', function()
+                fyler.open { dir = '.' }
+                vim.cmd.norm '<C-l>'
+            end, {
+                desc = 'Redraw, and reset the base directory',
+                buffer = event.buf,
+            })
+        end,
+    })
+end
