@@ -90,4 +90,31 @@ vim.opt.inccommand = 'split'
 vim.opt.breakindent = true
 vim.opt.splitright = true
 
-vim.opt.virtualedit:append 'block'
+-- vim.opt.virtualedit:append 'block'
+vim.opt.virtualedit = 'all'
+
+vim.o.backup = true
+
+local g = vim.api.nvim_create_augroup('RestoreCursor', { clear = true })
+vim.api.nvim_create_autocmd('BufReadPre', {
+    group = g,
+    callback = function(args)
+        vim.api.nvim_create_autocmd('FileType', {
+            once = true,
+            buffer = args.buf,
+            callback = function(args)
+                local ft = vim.o.filetype
+                local l = vim.fn.line [['"]]
+                if 1 <= l and l <= vim.fn.line '$'
+                -- Recommended by the Neovim manual
+                and not string.match(ft, 'commit')
+                and not string.match(ft, 'xxd')
+                and not string.match(ft, 'gitrebase')
+                then
+                    vim.cmd.norm [[g'"]]
+                end
+            end,
+        })
+    end,
+    desc = 'Restore cursor position on file open',
+})
