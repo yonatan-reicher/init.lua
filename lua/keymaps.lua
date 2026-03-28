@@ -270,3 +270,8 @@ vim.api.nvim_create_user_command('Cap', function()
     vim.fn.setpos("'<", s_start)
     vim.fn.setpos("'>", s_end)
 end, {})
+
+-- Format the current buffer.
+vim.keymap.set('n', '<leader>F', vim.lsp.buf.format, {
+    desc = 'Format the current buffer',
+})
