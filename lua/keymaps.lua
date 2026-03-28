@@ -283,3 +283,7 @@ vim.diagnostic.config {
         float = true,
     },
 }
+
+-- Use [n and ]n to go to the first and the last search result
+vim.keymap.set('n', '[n', 'ggn')
+vim.keymap.set('n', ']n', 'GN')
