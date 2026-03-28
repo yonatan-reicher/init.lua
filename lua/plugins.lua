@@ -212,7 +212,7 @@ if moduleExists 'fyler' then
     fyler.setup {
         views = {
             finder = {
-                default_explorer = true,
+                -- default_explorer = true, -- For some reason, this breaks git-fugitive
                 delete_to_trash = true,
                 icon = {
                     directory_empty = _G.MiniIcons.get('directory', 'nf-md-folder_outline'),
