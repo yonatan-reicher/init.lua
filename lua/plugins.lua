@@ -215,7 +215,7 @@ if moduleExists 'fyler' then
                 -- default_explorer = true, -- For some reason, this breaks git-fugitive
                 delete_to_trash = true,
                 icon = {
-                    directory_empty = _G.MiniIcons.get('directory', 'nf-md-folder_outline'),
+                    directory_empty = '󰉖',
                     directory_expanded = '󰝰',
                     directory_collapsed = nil,
                 },
