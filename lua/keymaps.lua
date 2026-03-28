@@ -49,6 +49,12 @@ vim.keymap.set('n', '<leader>lw', ':set wrap! <CR>', { desc = 'Toggle line wrap'
 
 vim.keymap.set('n', '<Tab>', ':tabnext<CR>')
 vim.keymap.set('n', '<S-Tab>', ':tabprev<CR>')
+-- Setting the tab behaviour above seems to break `<C-i>`, as it seems to be
+-- just a recursive mapping for `<Tab>` (which does the same).
+vim.keymap.set('n', '<C-i>', '<C-i>')
+-- Also have [j and ]j for consistency!
+vim.keymap.set('n', '[j', '<C-o>')
+vim.keymap.set('n', ']j', '<C-i>')
 
 vim.keymap.set('n', '<C-w>[', function() vim.cmd('vertical resize -5') end, { desc = 'Shrink window width' })
 vim.keymap.set('n', '<C-w>]', function() vim.cmd('vertical resize +5') end, { desc = 'Increase window width' })
