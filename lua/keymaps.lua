@@ -167,12 +167,12 @@ vim.api.nvim_create_user_command('TG', function()
 end, {})
 
 
-vim.keymap.set('n', '<leader>c', function()
-    vim.cmd 'G commit'
-    vim.cmd.norm 'Gk$yiWgg'
-    vim.cmd.norm 'aupdate '
-    vim.cmd.norm 'p$'
-end)
+-- vim.keymap.set('n', '<leader>c', function()
+--     vim.cmd 'G commit'
+--     vim.cmd.norm 'Gk$yiWgg'
+--     vim.cmd.norm 'aupdate '
+--     vim.cmd.norm 'p$'
+-- end)
 
 
 -- Why ride a bike when you can fly?
