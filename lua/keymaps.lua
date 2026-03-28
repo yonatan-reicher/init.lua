@@ -245,11 +245,6 @@ vim.api.nvim_create_user_command('CloseUnusedBuffers', function()
     end
 end, {})
 
-vim.keymap.set('n', 'gD', function()
-    vim.cmd[[ tab split | norm gd ]]
-end)
-
-
 local function get_text(pos1, pos2)
     local n_lines = math.abs(pos2[2] - pos1[2]) + 1
     local lines = vim.api.nvim_buf_get_lines(0, pos1[2] - 1, pos2[2], false)
