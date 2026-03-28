@@ -202,7 +202,9 @@ if moduleExists 'render-markdown' then
     }
 end
 
-require 'mini.icons' .setup {}
+if moduleExists 'mini.icons' then
+    require 'mini.icons' .setup {}
+end
 
 -- A file tree viewer
 if moduleExists 'fyler' then
