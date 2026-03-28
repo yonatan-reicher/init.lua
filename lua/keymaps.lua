@@ -287,3 +287,11 @@ vim.diagnostic.config {
 -- Use [n and ]n to go to the first and the last search result
 vim.keymap.set('n', '[n', 'ggn')
 vim.keymap.set('n', ']n', 'GN')
+
+-- Use :DiffOrig to see the difference from the unmodified file for the current
+-- buffer.
+vim.api.nvim_create_user_command(
+    'DiffOrig',
+    'vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis',
+    { desc = 'Show difference on a modified file' }
+)
