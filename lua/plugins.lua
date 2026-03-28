@@ -28,7 +28,9 @@ vim.g.VM_leader = '<leader>v'
 
 -- Leap - Amazing s and f commands.
 if moduleExists 'leap' then
-    require('leap').add_default_mappings()
+    require('leap')
+    vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
+    vim.keymap.set('n',             'gs', '<Plug>(leap-from-window)')
 end
 
 -- Treesitter for Ast parsing!
