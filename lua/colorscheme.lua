@@ -2,7 +2,7 @@
 -- chill.
 if not moduleExists 'tokyonight' then
     vim.cmd.colorscheme 'habamax'
-    vim.cmd.highlight 'Normal ctermfg=250 ctermbg=16 guifg=#bcbcbc guibg=#00000000'
+    vim.cmd.highlight 'Normal guibg=#000000'
     return
 end
 
