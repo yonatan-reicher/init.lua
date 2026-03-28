@@ -1,3 +1,5 @@
+-- If we don't have the `tokyonight` plugin, use `habamax` instead. It's pretty
+-- chill.
 if not moduleExists 'tokyonight' then
     vim.cmd.colorscheme 'habamax'
     vim.cmd.highlight 'Normal ctermfg=250 ctermbg=16 guifg=#bcbcbc guibg=#00000000'
