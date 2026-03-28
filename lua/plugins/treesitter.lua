@@ -7,7 +7,13 @@ if moduleExists 'nvim-treesitter' then
         -- parser_install_dir = "/some/path/to/store/parsers",
     
         -- A list of parser names, or "all"
-        ensure_installed = { "c", "lua", "rust" },
+        ensure_installed = {
+            "bash",
+            "c",
+            "lua",
+            "rust",
+            "nu",
+        },
     
         -- Install parsers synchronously (only applied to `ensure_installed`)
         sync_install = false,
