@@ -94,6 +94,10 @@ vim.api.nvim_create_user_command('Term', function()
     ]]
 end, {})
 
+vim.keymap.set('n', '<leader>t', '<Cmd>:Term<CR>', {
+    desc = 'Synonym for :Term',
+})
+
 vim.keymap.set('n', '>' , '>>')
 vim.keymap.set('n', '<' , '<<')
 
@@ -165,6 +169,10 @@ vim.api.nvim_create_user_command('TG', function()
         TabooRename git
     ]]
 end, {})
+
+vim.keymap.set('n', '<leader>g', '<cmd>TG<CR>', {
+    desc = 'Synonym for :TG',
+})
 
 
 -- vim.keymap.set('n', '<leader>c', function()
