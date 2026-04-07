@@ -313,3 +313,8 @@ vim.api.nvim_create_user_command(
     'vert new | set bt=nofile | r ++edit # | 0d_ | diffthis | wincmd p | diffthis',
     { desc = 'Show difference on a modified file' }
 )
+
+-- Just like `grr` and `gri`
+vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, {
+    desc = 'Go to type-definition of symbol'
+})
