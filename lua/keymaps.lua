@@ -318,3 +318,27 @@ vim.api.nvim_create_user_command(
 vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, {
     desc = 'Go to type-definition of symbol'
 })
+
+vim.api.nvim_create_user_command(
+    'Banner',
+    function(opts)
+        local title = opts.args
+        -- Make a banner consisting of a border at the top and bottom, and a
+        -- title in the middle
+        local border_width = vim.o.textwidth
+        border_width = border_width - (#vim.o.commentstring - 2) -- -2 for the length of '%s' in commentstring
+        local border_line = string.gsub(vim.o.commentstring, '%%s', string.rep('=', border_width))
+        local title_left_padding = (vim.o.textwidth - #title) / 2
+        title_left_padding = title_left_padding - (#vim.o.commentstring - 2)
+        local title_line = string.gsub(vim.o.commentstring, '%%s', string.rep(' ', title_left_padding) .. title)
+        local lines = {border_line, title_line, border_line}
+        vim.api.nvim_put( -- Add text at cursor
+            lines, -- input
+            'l', -- line-wise mode
+            false, -- before cursor
+            true -- put cursor after the inserted text
+        )
+    end, {
+    desc = 'Insert a banner for separating source-code files to pretty sections',
+    nargs = 1,
+})
