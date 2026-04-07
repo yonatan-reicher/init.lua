@@ -288,7 +288,17 @@ vim.diagnostic.config {
         current_line = true,
     },
     jump = {
-        float = true,
+        on_jump = function(diagnostic, buf)
+            if not diagnostic then return end
+
+            vim.diagnostic.show(
+              diagnostic.namespace,
+              buf,
+              { diagnostic },
+              { virtual_lines = { current_line = true }, virtual_text = false }
+            )
+        end,
+        -- float = true,
     },
 }
 
