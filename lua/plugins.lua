@@ -152,9 +152,9 @@ end
 -- <leader>mc close
 -- <leader>mo open
 -- <leader>mf focus
-if moduleExists 'codewindow' then
+if false and moduleExists 'codewindow' then
     local codewindow = require('codewindow')
-    codewindow.setup()
+    codewindow.setup { use_treesitter = false }
     codewindow.apply_default_keybinds()
 end
 
@@ -213,6 +213,7 @@ if moduleExists 'fyler' then
         views = {
             finder = {
                 -- default_explorer = true, -- For some reason, this breaks git-fugitive
+                close_on_select = false,
                 delete_to_trash = true,
                 icon = {
                     directory_empty = '󰉖',

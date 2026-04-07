@@ -35,3 +35,4 @@ vim.opt.shellquote = ""
 -- 2. show the stdout, stderr and the return_code on the screen
 -- NOTE: `ansi strip` removes all ansi coloring from nushell errors
 vim.opt.shellpipe = '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
+vim.opt.shellpipe = '| complete | tee { get stderr | ansi strip | save --force --raw %s } | $"─── STDOUT ──────\n$($in.stdout)─── STDERR ──────\n($in.stderr)─── EXIT CODE ───\n($in.exit_code)"'

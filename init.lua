@@ -14,6 +14,7 @@ require('lean-files')
 require('rust')
 require('project-local-configuration')
 require('obsidian')
+require 'latex'
 if vim.fn.executable('nu') == 1 then
     require('nu')
 end

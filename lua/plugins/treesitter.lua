@@ -1,42 +1,37 @@
-if moduleExists 'nvim-treesitter' then
-    require('nvim-treesitter.configs').setup {
-        -- A directory to install the parsers into.
-        -- If this is excluded or nil parsers are installed
-        -- to either the package dir, or the "site" dir.
-        -- If a custom path is used (not nil) it must be added to the runtimepath.
-        -- parser_install_dir = "/some/path/to/store/parsers",
-    
-        -- A list of parser names, or "all"
-        ensure_installed = {
-            "bash",
-            "c",
-            "lua",
-            "rust",
-            "nu",
-        },
-    
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = true,
-    
-        -- Automatically install missing parsers when entering buffer
-        auto_install = true,
-    
-        -- List of parsers to ignore installing (for "all")
-        -- ignore_install = { "javascript" },
-    
-        highlight = {
-          -- `false` will disable the whole extension
-          enable = true,
-    
-          -- list of language that will be disabled
-          -- disable = { "c", "rust" },
-    
-          -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-          -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-          -- Using this option may slow down your editor, and you may see some duplicate highlights.
-          -- Instead of true it can also be a list of languages
-          additional_vim_regex_highlighting = false,
-        },
-    }
-    -- vim.opt.runtimepath:append("/some/path/to/store/parsers")
+if not moduleExists 'nvim-treesitter' then return end
+
+local languages = {
+    "bash",
+    "c",
+    "lua",
+    "rust",
+    "nu",
+}
+
+local ts = require 'nvim-treesitter'
+ts.install(languages):wait(300000)
+
+function get_installed()
+    local t = ts.get_installed()
+    if vim.list_contains(t, 'latex') then
+        table.insert(t, 'tex')
+    end
+    return t
 end
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = '*',
+    group = vim.api.nvim_create_augroup('my.treesitter.config', { clear = true }),
+    callback = function(event)
+        local ft = event.amatch
+        if not vim.list_contains(get_installed(), ft) then return end
+        print(event)
+        -- syntax highlighting, provided by Neovim
+        vim.treesitter.start()
+        -- folds, provided by Neovim
+        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+        vim.wo.foldmethod = 'expr'
+        -- indentation, provided by nvim-treesitter
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+})

@@ -93,8 +93,6 @@ vim.opt.splitright = true
 -- vim.opt.virtualedit:append 'block'
 vim.opt.virtualedit = 'all'
 
-vim.o.backup = true
-
 local g = vim.api.nvim_create_augroup('RestoreCursor', { clear = true })
 vim.api.nvim_create_autocmd('BufReadPre', {
     group = g,
