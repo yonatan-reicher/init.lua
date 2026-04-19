@@ -284,9 +284,9 @@ vim.keymap.set('n', '<leader>F', vim.lsp.buf.format, {
     desc = 'Format the current buffer',
 })
 vim.diagnostic.config {
-    virtual_lines = {
-        current_line = true,
-    },
+    -- virtual_lines = {
+    --     current_line = true,
+    -- },
     jump = {
         on_jump = function(diagnostic, buf)
             if not diagnostic then return end
