@@ -361,3 +361,16 @@ vim.api.nvim_create_user_command(
     desc = 'Insert a banner for separating source-code files to pretty sections',
     nargs = 1,
 })
+
+vim.keymap.set('i', '<C-\\>banner2', function()
+    local title = vim.fn.input('Banner title: ')
+    local _, row, col = unpack(vim.fn.getcurpos())
+    local commentstring = vim.o.commentstring
+    local left, right = string.match(commentstring, '^(.*)%%s(.*)$')
+    local textwidth = vim.o.textwidth
+    local line_width = textwidth - #left - #right - col + 1
+    local left_padding = '------ '
+    local right_padding = string.rep('-', line_width - #title - #left_padding - 1)
+    local line = left .. left_padding .. title .. ' ' .. right_padding .. right
+    vim.api.nvim_put({ line }, 'c', true, true)
+end, { desc = 'Makes slightly smaller banner' })
