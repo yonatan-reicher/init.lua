@@ -161,6 +161,10 @@ vim.cmd.digraphs('nn', 0x2209) -- ∉
 vim.cmd.digraphs('JO', 0x2A1D) -- ⨝
 vim.cmd.digraphs('ns', 0x2099) -- ₙ
 vim.cmd.digraphs('ms', 0x2098) -- ₘ
+vim.cmd.digraphs('|-', 0x22A2) -- ⊢
+vim.cmd.digraphs('-|', 0x22A3) -- ⊣
+vim.cmd.digraphs('TT', 0x22A4) -- ⊤
+vim.cmd.digraphs('-T', 0x22A5) -- ⊥
 
 -- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
