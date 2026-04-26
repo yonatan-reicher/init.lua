@@ -13,7 +13,7 @@ if moduleExists 'telescope' then
         },
         pickers = {
             find_files = {
-                layout_strategy = 'cursor',
+                layout_strategy = 'horizontal',
                 layout_config = {
                     height = 15,
                 },
