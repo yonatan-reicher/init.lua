@@ -323,44 +323,39 @@ vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, {
     desc = 'Go to type-definition of symbol'
 })
 
-vim.api.nvim_create_user_command(
-    'Banner',
-    function(opts)
-        local title = opts.args
-        local commentstring = vim.o.commentstring
-        local textwidth = vim.o.textwidth
-        local left, right = string.match(commentstring, '^(.*)%%s(.*)$')
-        vim.validate { title = { title, 'string' } }
-        local line_width = textwidth - #left - #right
-        -- Make a banner consisting of a border at the top and bottom, and a
-        -- title in the middle
-        local border_line = string.rep('=', line_width)
-        -- For the title line, we have two cases:
-        -- 1. The comment string ends with '%s'. This means that nothing is
-        -- needed to close a comment. In this case, we want nothing on the
-        -- right.
-        -- 2. The comment string does not end after '%s' (e.g. it is '/* %s */').
-        -- In this case, we want to add spaces before the closing part of the
-        -- comment.
-        local title_left_padding = math.floor((line_width - #title) / 2)
-        local title_right_padding = line_width - title_left_padding - #title
-        if #right == 0 then title_right_padding = 0 end
-        local title_line = string.rep(' ', title_left_padding) .. title .. string.rep(' ', title_right_padding)
-        local lines = {border_line, title_line, border_line}
-        -- Modify the lines to be comments.
-        for i, line in ipairs(lines) do
-            lines[i] = string.gsub(commentstring, '%%s', line)
-        end
-        vim.api.nvim_put( -- Add text at cursor
-            lines, -- input
-            'l', -- char-wise mode
-            true, -- after cursor
-            true -- put cursor after the inserted text
-        )
-    end, {
-    desc = 'Insert a banner for separating source-code files to pretty sections',
-    nargs = 1,
-})
+vim.keymap.set('i', '<C-\\>banner1', function()
+    local title = vim.fn.input('Banner title: ')
+    local commentstring = vim.o.commentstring
+    local textwidth = vim.o.textwidth
+    local left, right = string.match(commentstring, '^(.*)%%s(.*)$')
+    vim.validate { title = { title, 'string' } }
+    local line_width = textwidth - #left - #right
+    -- Make a banner consisting of a border at the top and bottom, and a
+    -- title in the middle
+    local border_line = string.rep('=', line_width)
+    -- For the title line, we have two cases:
+    -- 1. The comment string ends with '%s'. This means that nothing is
+    -- needed to close a comment. In this case, we want nothing on the
+    -- right.
+    -- 2. The comment string does not end after '%s' (e.g. it is '/* %s */').
+    -- In this case, we want to add spaces before the closing part of the
+    -- comment.
+    local title_left_padding = math.floor((line_width - #title) / 2)
+    local title_right_padding = line_width - title_left_padding - #title
+    if #right == 0 then title_right_padding = 0 end
+    local title_line = string.rep(' ', title_left_padding) .. title .. string.rep(' ', title_right_padding)
+    local lines = {border_line, title_line, border_line}
+    -- Modify the lines to be comments.
+    for i, line in ipairs(lines) do
+        lines[i] = string.gsub(commentstring, '%%s', line)
+    end
+    vim.api.nvim_put( -- Add text at cursor
+        lines, -- input
+        'c', -- char-wise mode
+        false, -- after cursor
+        true -- put cursor after the inserted text
+    )
+end, { desc = 'Insert a big banner for separating source-code files to pretty sections' })
 
 vim.keymap.set('i', '<C-\\>banner2', function()
     local title = vim.fn.input('Banner title: ')
@@ -372,5 +367,5 @@ vim.keymap.set('i', '<C-\\>banner2', function()
     local left_padding = '------ '
     local right_padding = string.rep('-', line_width - #title - #left_padding - 1)
     local line = left .. left_padding .. title .. ' ' .. right_padding .. right
-    vim.api.nvim_put({ line }, 'c', true, true)
+    vim.api.nvim_put({ line }, 'c', false, true)
 end, { desc = 'Makes slightly smaller banner' })
