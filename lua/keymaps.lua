@@ -179,14 +179,6 @@ vim.keymap.set('n', '<leader>g', '<cmd>TG<CR>', {
 })
 
 
--- vim.keymap.set('n', '<leader>c', function()
---     vim.cmd 'G commit'
---     vim.cmd.norm 'Gk$yiWgg'
---     vim.cmd.norm 'aupdate '
---     vim.cmd.norm 'p$'
--- end)
-
-
 -- Why ride a bike when you can fly?
 -- https://2.bp.blogspot.com/-d1GaUBk-Y10/TyFhskmCYRI/AAAAAAAAARQ/CIEx1V7FLqg/s640/vim-and-vigor-004-flying_is_faster_than_cycling.png
 -- Honestly, <leader>fb (telescope buffer) is probably better, but this is so
@@ -369,3 +361,28 @@ vim.keymap.set('i', '<C-\\>banner2', function()
     local line = left .. left_padding .. title .. ' ' .. right_padding .. right
     vim.api.nvim_put({ line }, 'c', false, true)
 end, { desc = 'Makes slightly smaller banner' })
+
+function get_git_root(path)
+    -- The ';' means to search for the given directory in the parents of the
+    -- given path.
+    local git_dir_path = vim.fn.finddir('.git', path .. ';')
+    if git_dir_path == '' then return nil end
+    return vim.fn.fnamemodify(git_dir_path, ':h')
+end
+
+vim.keymap.set('n', '<leader>c', function()
+    local filename = vim.fn.expand '%:p'
+    local git_root = get_git_root(filename)
+    if not git_root then
+        print('Not in a git repository!')
+        return
+    end
+    relative_filename = filename
+    if filename:sub(1, #git_root) == git_root then
+        relative_filename = filename:sub(#git_root + 2)
+    end
+    local commit_message = 'update ' .. relative_filename
+    vim.cmd 'G add %'
+    vim.cmd 'G commit'
+    vim.cmd('normal! i' .. commit_message)
+end, { desc = 'Add the current file to the git staging area and commit it with a default message' })
