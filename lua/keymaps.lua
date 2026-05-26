@@ -377,9 +377,10 @@ vim.keymap.set('n', '<leader>c', function()
         print('Not in a git repository!')
         return
     end
+    git_root = vim.fn.fnamemodify(git_root, ':p')
     relative_filename = filename
     if filename:sub(1, #git_root) == git_root then
-        relative_filename = filename:sub(#git_root + 2)
+        relative_filename = filename:sub(#git_root + 1)
     end
     local commit_message = 'update ' .. relative_filename
     vim.cmd 'G add %'
