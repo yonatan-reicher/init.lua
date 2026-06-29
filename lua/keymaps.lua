@@ -146,16 +146,16 @@ end
 -- Digraphs
 vim.keymap.set('i', '<C-\\>', '<C-k>')
 -- Digraphs are added via their UTF-16 code point.
-vim.cmd.digraphs('-m', 0x21A4) -- ↤
+vim.cmd.digraphs('m<', 0x21A4) -- ↤
 vim.cmd.digraphs('m^', 0x21A5) -- ↥
-vim.cmd.digraphs('m-', 0x21A6) -- ↦
+vim.cmd.digraphs('m>', 0x21A6) -- ↦
 vim.cmd.digraphs('mv', 0x21A7) -- ↧
-vim.cmd.digraphs('-M', 0x27FB) -- ⟻
-vim.cmd.digraphs('M-', 0x27FC) -- ⟼
-vim.cmd.digraphs('=m', 0x2906) -- ⤆
-vim.cmd.digraphs('m=', 0x2907) -- ⤇
-vim.cmd.digraphs('=M', 0x27FD) -- ⟽
-vim.cmd.digraphs('M=', 0x27FE) -- ⟾
+vim.cmd.digraphs('M<', 0x27FB) -- ⟻
+vim.cmd.digraphs('M>', 0x27FC) -- ⟼
+vim.cmd.digraphs('m{', 0x2906) -- ⤆
+vim.cmd.digraphs('m}', 0x2907) -- ⤇
+vim.cmd.digraphs('M{', 0x27FD) -- ⟽
+vim.cmd.digraphs('M}', 0x27FE) -- ⟾
 vim.cmd.digraphs('in', 0x2208) -- ∈
 vim.cmd.digraphs('nn', 0x2209) -- ∉
 vim.cmd.digraphs('JO', 0x2A1D) -- ⨝
