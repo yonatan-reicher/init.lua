@@ -8,5 +8,6 @@ vim.api.nvim_create_autocmd({"BufRead"}, {
     callback = function(event)
         -- vim.wo is for window-scoped options
         vim.wo.spell = false
+        vim.bo.tw = 100
     end,
 })
