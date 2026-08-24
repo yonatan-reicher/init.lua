@@ -107,7 +107,7 @@ if moduleExists 'twilight' then
             alpha = 0.75,
             inactive = true, -- Dim other windows too.
         },
-        treesitter = true,
+        treesitter = false,
         context = 15,
     }
 end
@@ -172,7 +172,7 @@ end
 
 -- Lean
 if moduleExists 'lean' then
-    require('lean').setup {
+    vim.g.lean_config = {
         mappings = true,
     }
 end
