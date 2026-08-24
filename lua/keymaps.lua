@@ -171,6 +171,8 @@ vim.api.nvim_create_user_command('TG', function()
     vim.cmd[[
         tab G
         TabooRename git
+        " Also goes down!
+        norm 4j
     ]]
 end, {})
 
