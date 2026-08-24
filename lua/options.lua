@@ -58,6 +58,7 @@ vim.opt.path:append("**")
 
 -- STOCK COMPLETION SETTINGS
 vim.opt.spell = true
+vim.opt.completeopt:append 'fuzzy'
 
 -- Persistent undo.
 vim.opt.undofile = true
