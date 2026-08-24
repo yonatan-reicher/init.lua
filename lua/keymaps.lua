@@ -97,6 +97,9 @@ end, {})
 vim.keymap.set('n', '<leader>t', '<Cmd>:Term<CR>', {
     desc = 'Synonym for :Term',
 })
+vim.keymap.set('n', '<C-w>e', '<Cmd>:tabnew<CR>:e<Space>', {
+    desc = 'Run `:e` after opening new tab'
+})
 
 vim.keymap.set('n', '>' , '>>')
 vim.keymap.set('n', '<' , '<<')
