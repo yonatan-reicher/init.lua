@@ -10,7 +10,6 @@ require('plugins')
 require 'language-servers'
 require('colorscheme')
 require('statusline')
-require('lean-files')
 require('rust')
 require('project-local-configuration')
 require('obsidian')
