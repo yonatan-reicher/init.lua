@@ -6,3 +6,5 @@ vim.bo.commentstring = '-- %s'
 vim.wo.spell = false
 vim.bo.tw = 100
 vim.wo.colorcolumn = '101'
+
+vim.keymap.set('n', '<leader>lr', '<Cmd>:LeanRefresh<CR>', {})
