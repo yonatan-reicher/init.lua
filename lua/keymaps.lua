@@ -170,6 +170,7 @@ vim.cmd.digraphs('|-', 0x22A2) -- ⊢
 vim.cmd.digraphs('-|', 0x22A3) -- ⊣
 vim.cmd.digraphs('TT', 0x22A4) -- ⊤
 vim.cmd.digraphs('-T', 0x22A5) -- ⊥
+vim.cmd.digraphs('IL', 0x20AA) -- ₪
 
 -- Vim fugitive :TG should open in a new tab instead of a split.
 vim.api.nvim_create_user_command('TG', function()
