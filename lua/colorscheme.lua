@@ -9,13 +9,14 @@ end
 util = require("tokyonight.util")
 require("tokyonight").setup({
     style = "night",
+    transparent = false, -- vim.o.background == 'light',
     styles = {
       comments = {},
       keywords = { fg = "#569cd6" },
       functions = {},
       variables = {},
     },
-    day_brightness = 0.25, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+    day_brightness = 0.3, -- Adjusts the brightness of the colors of the bright style. Number between 0 and 1, from dull to vibrant colors
     hide_inactive_statusline = true,
     dim_inactive = true, -- dims inactive windows
     terminal_colors = true, -- whether to set the terminal colors (e.g. `:terminal`, `:!`, etc.)
@@ -25,26 +26,24 @@ require("tokyonight").setup({
     ---@param colors ColorScheme
     on_colors = function(colors) 
         colors.cyan = "#9cdcfe"
-        if vim.o.background == "dark" then
-            colors.gray = "#2d2d30"
-            colors.bg = "#1c1c1c"
-            colors.bg_dark = "#000000"
-            colors.comment = "#6d7481"
-            colors.green1 = "#4ec9b0"
-        else
-            colors.gray = "#dddded"
-            colors.bg = "#e1e5e1"
-            colors.fg = "#101030"
-            colors.green1 = "#43b07d"
-            colors.bg_dark = util.blend(colors.bg, 0.5, colors.gray)
-            colors.cyan = util.blend(util.darken(colors.cyan, 1.4), 0.7, colors.blue1)
-            -- colors.cyan = "#8cbcfe"
-        end
+        colors.gray = "#2d2d30"
+        colors.fg = util.brighten(colors.fg, .2)
+        -- colors.bg = "#101010"
+        colors.bg = "#1f1f1f"
+        colors.bg_dark = "#000000"
+        colors.comment = "#6a9955" -- "#6d7481"
+        colors.green1 = "#4ec9b0"
         colors.dark_gray = util.blend(colors.gray, 0.5, colors.black)
         colors.soft_yellow = "#dcdcaa"
         if vim.o.background == "light" then
-            colors.soft_yellow = util.darken(colors.soft_yellow, 18.8)
-            colors.soft_yellow = util.blend(colors.soft_yellow, 0.5, colors.yellow)
+            -- this function is what is used internally by `tokyonight` to generate
+            -- the day theme.
+            util.invert(colors)
+            colors.fg = util.blend(colors.fg, 0.5, '#000000')
+            -- colors.bg_dark = util.blend(colors.bg, 0.9, colors.fg)
+            -- colors.bg_dark1 = util.blend(colors.bg_dark, 0.9, colors.fg)
+            -- colors.soft_yellow = util.darken(colors.soft_yellow, 18.8)
+            -- colors.soft_yellow = util.blend(colors.soft_yellow, 0.5, colors.yellow)
         end
     end,
     
@@ -56,7 +55,7 @@ require("tokyonight").setup({
         -- highlights['@keyword'].fg = colors.blue2
         -- print(vim.inspect(colors))
         highlights['@keyword'] = { fg = colors.purple, italic = false }
-        highlights['@keyword.import'] = '@keyword'
+        highlights['@keyword.import'] = { fg = '#c586c0', italic = false }
         highlights['@property'] = '@variable'
         highlights['@variable.member'] = '@variable'
         highlights['@variable.builtin'] = 'Special'
@@ -74,6 +73,8 @@ require("tokyonight").setup({
         highlights.MatchParen.italic = true
         highlights.StatusLine.bg = colors.gray
         highlights.StatusLineNC.bg = colors.dark_gray
+        highlights.StatusLineFileName = { fg = highlights.StatusLine.fg, bg = highlights.StatusLine.bg }
+        highlights.StatusLineLookingAt = { fg = colors.soft_yellow, bg = highlights.StatusLine.bg }
         highlights['@comment.todo'] = highlights.Todo
         highlights.Special.fg = nil
         highlights.Pmenu = colors.white
@@ -90,12 +91,19 @@ require("tokyonight").setup({
         highlights['@markup.heading.6.markdown'] = { bold = true }
         highlights['@markup.raw.markdown_inline'] = { bg = colors.dark_gray }
         highlights['@markup.list.markdown'] = {}
+        highlights['RenderMarkdownCode'] = { bg = colors.black }
         -- for key, value in pairs(highlights) do
         --     if key:lower():find('float') or key:lower():find('shadow') then
         --         print(key , ' = ' , vim.inspect(value))
         --     end
         -- end
         highlights['Highlight'] = { fg = colors.black, bg = colors.yellow, bold = true }
+        highlights.pythonBuiltin = '@variable.builtin'
+        highlights.pythonInclude = '@keyword.import'
+        highlights.pythonStatement = { fg = '#569cd6' }
+        highlights.pythonClassVar = { fg = '#569cd6' }
+        highlights.pythonDecoratorName = { fg = '#4ec9b0' }
+        highlights.pythonDecorator = 'pythonDecoratorName'
     end,
 
     -- All on_colors and on_highlights table keys and default values are here:

@@ -86,16 +86,19 @@ vim.api.nvim_create_user_command('Size', function()
     vim.cmd ('vertical resize ' .. resize_to)
 end, {})
 
-vim.api.nvim_create_user_command('Term', function()
-    vim.cmd[[
-        tabnew
-        TabooRename term
-        terminal
-    ]]
-end, {})
-
-vim.keymap.set('n', '<leader>t', '<Cmd>:Term<CR>', {
-    desc = 'Synonym for :Term',
+vim.keymap.set('n', '<leader>t', function()
+    vim.cmd.tabnew()
+    vim.cmd.TabooRename 'term'
+    vim.cmd.terminal()
+end, {
+    desc = 'Open a terminal in a new tab',
+})
+vim.keymap.set('n', '<C-w>t', function()
+    vim.cmd.split()
+    vim.cmd.resize(10)
+    vim.cmd.terminal()
+end, {
+    desc = 'Open a terminal in a new window',
 })
 vim.keymap.set('n', '<C-w>e', '<Cmd>:tabnew<CR>:e<Space>', {
     desc = 'Run `:e` after opening new tab'
@@ -361,6 +364,7 @@ vim.keymap.set('i', '<C-\\>banner2', function()
     local title = vim.fn.input('Banner title: ')
     local _, row, col = unpack(vim.fn.getcurpos())
     local commentstring = vim.o.commentstring
+    if commentstring == '-- %s' then commentstring = '--%s' end -- special case for lua style
     local left, right = string.match(commentstring, '^(.*)%%s(.*)$')
     local textwidth = vim.o.textwidth
     local line_width = textwidth - #left - #right - col + 1
@@ -395,3 +399,19 @@ vim.keymap.set('n', '<leader>c', function()
     vim.cmd 'G commit'
     vim.cmd('normal! i' .. commit_message)
 end, { desc = 'Add the current file to the git staging area and commit it with a default message' })
+
+vim.keymap.set('n', 'gp', ':!git pull<CR>')
+
+vim.api.nvim_create_user_command('Make', function()
+    -- vim.api.nvim_create_autocmd('TermEnter', {
+    --     once = true,
+    --     callback = function(ev)
+    --         -- vim.api.nvim_put({ 'make' }, '', false, true)
+    --     end,
+    -- })
+    vim.cmd.execute '"normal \\<C-w>t"'
+    vim.api.nvim_put({ 'make', '' }, 'l', false, true)
+    vim.cmd.stopinsert()
+end, {
+    desc = "Call 'make' in a new terminal window, and scroll to the top",
+})

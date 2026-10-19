@@ -12,3 +12,9 @@ function moduleExists(name)
     return false
   end
 end
+
+function setTabStop2()
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
+    vim.bo.expandtab = true
+end
