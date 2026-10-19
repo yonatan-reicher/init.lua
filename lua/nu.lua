@@ -4,7 +4,7 @@
 -- INFO: settings to set nushell as the shell for the :! command
 -- --
 -- path to the Nushell executable
-vim.opt.sh = "nu"
+vim.opt.sh = "nu --interactive --login"
 
 -- WARN: disable the usage of temp files for shell commands
 -- because Nu doesn't support `input redirection` which Neovim uses to send buffer content to a command:
