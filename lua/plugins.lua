@@ -210,6 +210,9 @@ end
 if moduleExists 'fyler' then
     local fyler = require 'fyler'
     fyler.setup {
+        integrations = {
+            icon = "nvim_web_devicons"
+        },
         views = {
             finder = {
                 -- default_explorer = true, -- For some reason, this breaks git-fugitive

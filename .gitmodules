@@ -97,6 +97,3 @@
 [submodule "pack/my-plugins/start/flyer.nvim"]
 	path = pack/my-plugins/start/flyer.nvim
 	url = https://github.com/A7Lavinraj/fyler.nvim.git
-[submodule "pack/my-plugins/start/mini.icons"]
-	path = pack/my-plugins/start/mini.icons
-	url = https://github.com/nvim-mini/mini.icons.git
