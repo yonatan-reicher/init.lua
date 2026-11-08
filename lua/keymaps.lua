@@ -132,8 +132,19 @@ function Config(a)
         vim.cmd('Explore')
     end
 end
+function ConfigFileType(a)
+    init_file_path = vim.fn.expand '$MYVIMRC'
+    config_dir_path = vim.fs.dirname(init_file_path)
+    file_path = config_dir_path .. '/ftplugin/' .. a.args .. '.lua'
+    if vim.fn.filereadable(file_path) == 1 then
+        vim.cmd.edit(file_path)
+    else
+        print('File-type plugin file not found: ' .. file_path)
+    end
+end
 vim.api.nvim_create_user_command('ConfigInit', ConfigInit, { nargs = '?' })
 vim.api.nvim_create_user_command('Config', Config, { nargs = '?' })
+vim.api.nvim_create_user_command('ConfigFileType', ConfigFileType, { nargs = '?' })
 
 -- Telescope bingings.
 if moduleExists 'telescope.builtin' then
@@ -326,7 +337,7 @@ vim.keymap.set('n', 'grt', vim.lsp.buf.type_definition, {
     desc = 'Go to type-definition of symbol'
 })
 
-vim.keymap.set('i', '<C-\\>banner1', function()
+vim.keymap.set('i', '<C-\\>ban1', function()
     local title = vim.fn.input('Banner title: ')
     local commentstring = vim.o.commentstring
     local textwidth = vim.o.textwidth
@@ -360,7 +371,7 @@ vim.keymap.set('i', '<C-\\>banner1', function()
     )
 end, { desc = 'Insert a big banner for separating source-code files to pretty sections' })
 
-vim.keymap.set('i', '<C-\\>banner2', function()
+vim.keymap.set('i', '<C-\\>ban2', function()
     local title = vim.fn.input('Banner title: ')
     local _, row, col = unpack(vim.fn.getcurpos())
     local commentstring = vim.o.commentstring
@@ -400,7 +411,7 @@ vim.keymap.set('n', '<leader>c', function()
     vim.cmd('normal! i' .. commit_message)
 end, { desc = 'Add the current file to the git staging area and commit it with a default message' })
 
-vim.keymap.set('n', 'gp', ':!git pull<CR>')
+vim.keymap.set('n', 'gp', ':!git pull<CR>:!git push<CR>')
 
 vim.api.nvim_create_user_command('Make', function()
     -- vim.api.nvim_create_autocmd('TermEnter', {
